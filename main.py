@@ -363,6 +363,175 @@ class Solution:
     
 
 
+class Solution:
+    def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
+        restaurant=defaultdict(list)
+        for i,string in enumerate(list1):
+            if string in list2:
+                restaurant[string].append(i)
+                restaurant[string].append(list2.index(string))
+        output=[]
+        minimum=min([sum(liste) for liste in restaurant.values()])
+        for key,val in restaurant.items():
+            if sum(val)==minimum:
+                output.append(key)
+        return output
+
+
+class Solution:
+    def secondHighest(self, s: str) -> int:
+        numbers=[int(char) for char in s if char.isdigit()]
+        if len(list(set(numbers)))<2:
+            return -1
+        unique_numbers=list(set(numbers))
+        liste_triee=sorted(unique_numbers, reverse=True)
+        return liste_triee[1]
+    
+    
+class Solution:
+    def removeDigit(self, number: str, digit: str) -> str:
+        occurence=defaultdict(list)
+        for i,char in enumerate(number):
+            occurence[char].append(i)
+        elu=0
+        liste_indice=occurence[digit]
+        for i in liste_indice:
+            candidat=int(number[:i]+number[i+1:])
+            elu=max(elu,candidat)
+        return str(elu)
+    
+
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        occurence=defaultdict(int)
+        for char in s:
+            occurence[char]+=1
+        return len(list(set(occurence.values())))==1
+    
+
+
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        frequency=defaultdict(int)
+        for num in nums:
+            frequency[num]+=1
+        m=max(list(frequency.values()))
+        liste_num=[]
+        for key,val in frequency.items():
+            if val==m:
+                liste_num.append(key)
+        somme=0
+        for num in liste_num:
+            somme+=nums.count(num)
+        return somme
+    
+
+
+class Solution:
+    def numberOfPairs(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        n=len(nums1)
+        m=len(nums2)
+        pair=0
+        for i in range(n):
+            for j in range(m):
+                if nums1[i]%(nums2[j]*k)==0:
+                    pair+=1
+        return pair
+
+
+
+class Solution:
+    def countKDifference(self, nums: List[int], k: int) -> int:
+        n=len(nums)
+        pair=0
+        for i in range(n):
+            for j in range(i+1,n):
+                if abs(nums[i]-nums[j])==k:
+                    pair+=1
+        return pair
+
+
+class Solution:
+    def countPairs(self, nums: List[int], k: int) -> int:
+        n=len(nums)
+        pair=0
+        for i in range(n):
+            for j in range(i+1,n):
+                if nums[i]==nums[j] and (i*j)%k==0:
+                    pair+=1
+        return pair
+    
+
+
+class Solution:
+    def sumDigit(self,n:int)->int:
+        somme=0
+        for char in str(n):
+            somme+=int(char)
+        return somme 
+
+    def countLargestGroup(self, n: int) -> int:
+        occurence=defaultdict(int)
+        for number in range(1,n+1):
+            sum_number=self.sumDigit(number)
+            occurence[sum_number]+=1
+        max_values=max(occurence.values())
+        return len([key for key,val in occurence.items() if val==max_values])
+    
+
+
+class Solution:
+    def numDifferentIntegers(self, word: str) -> int:
+        seen=set()
+        n=len(word)
+        i=0
+        while i<n:
+            if word[i].isdigit():
+                number=word[i]
+                while i+1<n and word[i+1].isdigit():
+                    number+=word[i+1]
+                    i+=1
+                seen.add(int(number))
+            i+=1
+        return len(seen)
+    
+
+
+class Solution:
+    def commonLetters(self, word1:str,word2:str)->bool:
+        for char in word1:
+            if char in word2:
+                return False
+        return True 
+
+    def maxProduct(self, words: List[str]) -> int:
+        maximum=0
+        for i,word in enumerate(words):
+            for j in range(i+1,len(words)):
+                if self.commonLetters(word,words[j]):
+                    maximum=max(maximum,len(word)*len(words[j]))
+        return maximum
+    
+
+
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        n=len(arr)
+        left=0
+        right=n-1
+        while left<=right:
+            middle=(left+right)//2
+            if arr[middle+1]-arr[middle]>=0:
+                left=middle+1
+            else:
+                right=middle-1
+        return left
+    
+
+
+
+    
+
 
 
 
