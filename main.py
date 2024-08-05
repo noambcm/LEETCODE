@@ -528,6 +528,135 @@ class Solution:
         return left
     
 
+class Solution:
+    def theMaximumAchievableX(self, num: int, t: int) -> int:
+        return num+2*t
+    
+
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        if not [num for num in nums if num%3!=0]:
+            return 0
+        somme=0
+        for i in range(len(nums)):
+            if nums[i]%3==2:
+                somme+=1
+            else:
+                somme+=nums[i]%3
+        return somme
+    
+
+class Solution:
+    def divisorSubstrings(self, num: int, k: int) -> int:
+        string=str(num)
+        potentielle=[]
+        beauty=0
+        for i in range(len(string)-k+1):
+            potentielle.append(int(string[i:i+k]))
+        for candidat in potentielle:
+            if candidat!=0 and num%candidat==0:
+                beauty+=1
+        return beauty
+    
+
+class Solution:
+    def numberOfChild(self, n: int, k: int) -> int:
+        if n==1:
+            return 0
+        position=0
+        direction=1
+        for _ in range(k):
+            position+=direction
+            if position==0 or position==n-1:
+                direction*=-1
+        return position
+    
+
+
+class Solution:
+    def passThePillow(self, n: int, time: int) -> int:
+        position=1
+        direction=1
+        for _ in range(time):
+            position+=direction
+            if position==1 or position==n:
+                direction*=-1
+        return position
+    
+
+
+class Solution:
+    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:
+        if purchaseAmount%10==0:
+            return 100-purchaseAmount
+        basis=(purchaseAmount//10)*10
+        if purchaseAmount%10>=5:
+            basis+=10
+        return 100-basis
+    
+
+
+class Solution:
+    def countBeautifulPairs(self, nums: List[int]) -> int:
+        count=0
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                if gcd(int(str(nums[i])[0]),int(str(nums[j])[-1]))==1:
+                    count+=1
+        return count
+    
+
+
+
+class Solution:
+    def countSymmetricIntegers(self, low: int, high: int) -> int:
+        count=0
+        for integer in range(low,high+1):
+            x=str(integer)
+            if len(x)%2==0:
+                n=len(x)//2
+                first_half=[int(x[i]) for i in range(0,n)]
+                second_half=[int(x[i]) for i in range(n,len(x))]
+                if sum(first_half)==sum(second_half):
+                    count+=1
+        return count
+    
+
+
+class Solution:
+    def sumDigit(self, n:int)->int:
+        string=str(n)
+        n=len(string)
+        somme=0
+        for i in range(n):
+            somme+=int(string[i])
+        return somme 
+
+    def countBalls(self, lowLimit: int, highLimit: int) -> int:
+        dictionnaire={i:0 for i in range(1,46)}
+        for number in range(lowLimit, highLimit+1):
+            sum_number=self.sumDigit(number)
+            dictionnaire[sum_number]+=1
+        return max(list(dictionnaire.values()))
+    
+
+
+class Solution:
+    def countTriples(self, n: int) -> int:
+        count=0
+        for a in range(1,n):
+            for b in range(1,n):
+                x=a*a+b*b
+                racine=int(sqrt(x))
+                if racine*racine==x and racine<=n:
+                    count+=1
+        return count
+    
+
+
+
+
+
 
 
     
