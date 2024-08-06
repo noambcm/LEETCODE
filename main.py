@@ -654,6 +654,220 @@ class Solution:
     
 
 
+class Solution:
+    def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:
+        x=min(numOnes,k)      
+        restant1=max(0,k-x) 
+        y=min(numZeros,restant1)
+        restant2=max(0,restant1-y)
+        max_sum=x+restant2*(-1)
+        return max_sum 
+    
+
+
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        liste=sorted(nums)
+        n=len(nums)
+        counting={'positif':0, 'negatif':0}
+        for num in nums:
+            if num>=0:
+                counting['positif']+=1
+            counting['negatif']+=1
+        if counting['negatif']==0 or counting['positif']==0:
+            return liste[n-1]*liste[n-2]*liste[n-3]
+        candidat1=liste[n-1]*liste[n-2]*liste[n-3]
+        candidat2=liste[0]*liste[1]*liste[-1]
+        return max(candidat1,candidat2)
+    
+
+
+class Solution:
+    def gcd(self,a:int,b:int)->int:
+        while b>0:
+            a,b=b,a%b
+        return a
+    
+    def divisor(self,n:int)->int:
+        divisors=[]
+        for i in range(1,n+1):
+            if n%i==0:
+                divisors.append(i)
+        return divisors
+        
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        len1=len(str1)
+        len2=len(str2)
+        gcd_length=self.gcd(len1,len2)
+        divisors=sorted(self.divisor(gcd_length), reverse=True)
+        for d in divisors:
+            candidat=str1[:d]
+            if candidat*(len1//d)==str1 and candidat*(len2//d)==str2:
+                return candidat
+        return ""
+    
+
+
+#Premiere version nzive ---> Time Limit
+class Solution:
+    def isMonotone(self,n:int)->bool:
+        number=str(n)
+        length=len(number)
+        i=0
+        while i<length-1:
+            if int(number[i+1])<int(number[i]):
+                return False
+            i+=1
+        return True
+
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        for i in range(n,-1,-1):
+            if self.isMonotone(i):
+                return i
+            
+
+#Deuxieme version
+class Solution:
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        number=list(str(n))
+        length=len(number)
+        mark=length
+        for i in range(length-1):
+            if int(number[i])>int(number[i+1]):
+                mark=i
+                break
+        if mark==length:
+            return n
+        while mark>0 and number[mark]==number[mark-1]:
+            mark-=1
+        number[mark]=str(int(number[mark])-1)
+        for i in range(mark+1,length):
+            number[i]='9'
+        return int("".join(number))
+
+
+
+class Solution:
+    def losingPlayer(self, x: int, y: int) -> str:
+        number=min(x,y//4)
+        if number%2!=0:
+            return "Alice"
+        return "Bob"
+    
+
+class Solution:
+    def numberOfCuts(self, n: int) -> int:
+        if n==1:
+            return 0
+        if n%2==0:
+            return n//2
+        return n
+    
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        string1=list(reversed(a))
+        string2=list(reversed(b))
+        somme1=0
+        somme2=0
+        for i in range(len(string1)):
+            somme1+=int(string1[i])*(2**i)
+        for i in range(len(string2)):
+            somme2+=int(string2[i])*(2**i)
+        somme=somme1+somme2
+        return bin(somme)[2:]
+    
+
+
+
+class Solution:
+    def toGoatLatin(self, sentence: str) -> str:
+        liste_sortie=[]
+        list_words=sentence.split()
+        for i,word in enumerate(list_words):
+            if word[0].lower() in ['a','e','i','o','u']:
+                liste_sortie.append(word+'ma'+'a'*(i+1))
+            else:
+                word=word[1:] + word[0]
+                liste_sortie.append(word+'ma'+'a'*(i+1))
+        return ' '.join(liste_sortie)
+    
+
+
+class Solution:
+    def diviseurs(self,num:int)-> list:
+        liste_diviseurs=[]
+        for i in range(1,num//2+1):
+            if num%i==0:
+                liste_diviseurs.append(i)
+        return liste_diviseurs
+
+    def checkPerfectNumber(self, num: int) -> bool:
+        if num%2!=0:
+            return False
+        return sum(self.diviseurs(num))==num
+    
+
+#Dans la base n-2, n=1x(n-2)^1 + 2x(n-2)^0 donc sa representation dans la base n-2 est 12. 1é n'est pas un palindrome
+class Solution:
+    def isStrictlyPalindromic(self, n: int) -> bool:
+        return False
+    
+
+class Solution:
+    def reverseInteger(self,n:int)->int:
+        string=str(n)
+        reversed_string=string[::-1]
+        return int(reversed_string)
+
+    def countDistinctIntegers(self, nums: List[int]) -> int:
+        liste_reversed=[0]*len(nums)
+        for i,number in enumerate(nums):
+            liste_reversed[i]=self.reverseInteger(number)
+        liste_sortie=nums + liste_reversed
+        return len(set(liste_sortie))
+    
+
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        string=str(abs(x))
+        reversed_string=string[::-1]
+        reversed_int=int(reversed_string)
+        if not -(2**31)<=reversed_int<=2**31-1:
+            return 0
+        if x>=0:
+            return reversed_int
+        else:
+            return -reversed_int
+        
+
+
+
+class Solution:
+    def reversal(self,num:int)->int:
+        string=str(num)
+        reversed_string=string[::-1]
+        reversed_integer=int(reversed_string)
+        return reversed_integer
+
+    def isSameAfterReversals(self, num: int) -> bool:
+        first_reversed=self.reversal(num)
+        second_reversed=self.reversal(first_reversed)
+        return num==second_reversed
+    
+
+
+class Solution:
+    def maximumNumberOfStringPairs(self, words: List[str]) -> int:
+        count=0
+        for i in range(len(words)-1):
+            for j in range(i+1,len(words)):
+                if words[i]==words[j][::-1]:
+                    count+=1
+        return count
+    
+
 
 
 
