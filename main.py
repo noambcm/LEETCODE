@@ -869,6 +869,204 @@ class Solution:
     
 
 
+class Solution:
+    def manipulation(self,nums:List[int])->list:
+        liste_sortie=[0]*(len(nums)-1)
+        for i in range(len(nums)-1):
+            liste_sortie[i]=(nums[i]+nums[i+1])%10
+        return liste_sortie
+
+    def triangularSum(self, nums: List[int]) -> int:
+        while len(nums)>1:
+            nums=self.manipulation(nums)
+        return nums[0]
+    
+
+
+class Solution:
+    def round(self,s:str,k:int)->str:
+        n=len(s)
+        first_list=[]
+        i=0
+        while i<len(s):
+            first_list.append(s[i:i+k])
+            i+=k
+        second_list=[0]*len(first_list)
+        for i,element in enumerate(first_list):
+            second_list[i]=sum([int(char) for char in element])
+        sortie=str()
+        for i in range(len(second_list)):
+            sortie=sortie + str(second_list[i])
+        return sortie
+
+    def digitSum(self, s: str, k: int) -> str:
+        if len(s)>k:
+            sortie=self.round(s,k)
+        while len(s)>k:
+            s=self.round(s,k)
+        return s
+    
+
+
+
+class Solution:
+    def operation(self,nums:List[int])->List[int]:
+        n=len(nums)
+        newNums=[0]*(n//2)
+        for i in range(n//2):
+            if i%2==0:
+                newNums[i]=min(nums[2*i],nums[2*i+1])
+            else:
+                newNums[i]=max(nums[2*i],nums[2*i+1])
+        return newNums
+
+    def minMaxGame(self, nums: List[int]) -> int:
+        if len(nums)==1:
+            return nums[0]
+        while len(nums)>1:
+            nums=self.operation(nums)
+        return nums[0]
+        
+
+
+
+    class Solution:
+    def findPeaks(self, mountain: List[int]) -> List[int]:
+        n=len(mountain)
+        liste_sortie=[]
+        for i in range(1,n-1):
+            if mountain[i]>mountain[i-1] and mountain[i]>mountain[i+1]:
+                liste_sortie.append(i)
+        return liste_sortie
+    
+
+
+class Solution:
+    def mergeSimilarItems(self, items1: List[List[int]], items2: List[List[int]]) -> List[List[int]]:
+        dictionnaire=defaultdict(int)
+        for liste in items1:
+            dictionnaire[liste[0]]+=liste[1]
+        for liste in items2:
+            dictionnaire[liste[0]]+=liste[1]
+        liste_sortie=[[key,val] for key,val in dictionnaire.items()]
+        return sorted(liste_sortie,key=lambda x:x[0])
+    
+
+
+class Solution:
+    def mergeArrays(self, nums1: List[List[int]], nums2: List[List[int]]) -> List[List[int]]:
+        dictionnaire=defaultdict(int)
+        for liste in nums1:
+            dictionnaire[liste[0]]+=liste[1]
+        for liste in nums2:
+            dictionnaire[liste[0]]+=liste[1]
+        sortie=[[key,val] for key,val in dictionnaire.items()]
+        return sorted(sortie, key=lambda x:x[0])
+    
+
+
+class Solution:
+    def busyStudent(self, startTime: List[int], endTime: List[int], queryTime: int) -> int:
+        students=0
+        n=len(startTime)
+        for i in range(n):
+            if startTime[i]<=queryTime and endTime[i]>=queryTime:
+                students+=1
+        return students
+    
+
+
+class Solution:
+    def rowAndMaximumOnes(self, mat: List[List[int]]) -> List[int]:
+        dictionnaire=defaultdict(int)
+        for i,liste in enumerate(mat):
+            dictionnaire[i]=liste.count(1)
+        max_value=max(list(dictionnaire.values()))
+        liste_keys=[key for key,val in dictionnaire.items() if val==max_value]
+        key=min(liste_keys)
+        return [key,dictionnaire[key]]
+    
+
+
+class Solution:
+    def numberOfPoints(self, nums: List[List[int]]) -> int:
+        seen=set()
+        for liste in nums:
+            beginning=liste[0]
+            end=liste[1]
+            for i in range(beginning,end+1):
+                seen.add(i)
+        return len(seen)
+    
+
+
+class Solution:
+    def wateringPlants(self, plants: List[int], capacity: int) -> int:
+        current_capacity=capacity
+        steps=0
+        n=len(plants)
+        for i in range(n):
+            if current_capacity>=plants[i]:
+                steps+=1
+                current_capacity-=plants[i]
+            else:
+                steps+=2*i
+                current_capacity=capacity-plants[i]
+                steps+=1
+        return steps
+    
+
+
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        gagnants=set()
+        perdants=set()
+        defeat_number=defaultdict(int)
+        for match in matches:
+            gagnants.add(match[0])
+            perdants.add(match[1])
+            perdant=match[1]
+            defeat_number[perdant]+=1
+        liste_gagnants=sorted([player for player in list(gagnants) if player not in perdants])
+        liste_perdants=sorted([key for key,val in defeat_number.items() if val==1])
+        return [liste_gagnants,liste_perdants]
+    
+
+
+class Solution:
+    def sortEvenOdd(self, nums: List[int]) -> List[int]:
+        arr=[0]*len(nums)
+        even=sorted([nums[i] for i in range(0,len(nums)) if i%2==0])
+        odd=sorted([nums[i] for i in range(0,len(nums)) if i%2!=0],reverse=True)
+        for i in range(len(nums)):
+            if i%2==0:
+                arr[i]=even[i//2]
+            else:
+                arr[i]=odd[i//2]
+        return arr
+    
+
+
+class Solution:
+    def isMonotonic(self, nums: List[int]) -> bool:
+        if sorted(nums)==nums:
+            return True
+        if sorted(nums,reverse=True)==nums:
+            return True
+        return False
+    
+
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        frequency=defaultdict(int)
+        n=len(arr)
+        for num in arr:
+            frequency[num]+=1/n
+        for key,val in frequency.items():
+            if val>0.25:
+                return key
+            
+
 
 
 
