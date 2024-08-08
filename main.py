@@ -1067,7 +1067,182 @@ class Solution:
                 return key
             
 
+class Solution:
+    def maximumValue(self, strs: List[str]) -> int:
+        maximum_value=0
+        for string in strs:
+            if string.isdigit():
+                maximum_value=max(maximum_value,int(string))
+            else:
+                maximum_value=max(maximum_value,len(string))
+        return maximum_value
+    
 
+
+class Solution:
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        arr.sort()
+        sortie=[]
+        diff_mini=float('inf')
+        for i in range(len(arr)-1):
+            if arr[i+1]-arr[i]<diff_mini:
+                diff_mini=arr[i+1]-arr[i]
+        for i in range(len(arr)-1):
+            if arr[i+1]-arr[i]==diff_mini:
+                sortie.append([arr[i],arr[i+1]])
+        return sorted(sortie,key=lambda x:x[0])
+    
+
+
+class Solution:
+    def countElements(self, nums: List[int]) -> int:
+        occurence=defaultdict(int)
+        number=0
+        for num in nums:
+            occurence[num]+=1
+        unique=sorted(set(nums))
+        for i in range(1,len(unique)-1):
+            number+=occurence[unique[i]]
+        return number
+
+
+
+class Solution:
+    def minStartValue(self, nums: List[int]) -> int:
+        liste_candidats=[0]*len(nums)
+        for i in range(len(nums)):
+            liste_candidats[i]=1-sum(nums[:i+1])
+        if max(liste_candidats)>0:
+            return max(liste_candidats)
+        else:
+            return 1
+        
+
+
+#Version O(n(n+k))
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        missing=[]
+        i=1
+        while len(missing)<k:
+            if i not in arr:
+                missing.append(i)
+            i+=1
+        return missing[k-1]
+    
+#Version O(n) : ce qui est demande
+
+
+
+
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        n=len(letters)
+        left=0
+        right=n-1
+        while left<=right:
+            middle=(left+right)//2
+            if letters[middle]>target:
+                right=middle-1
+            elif letters[middle]<=target:
+                left=middle+1
+        return letters[left%n]
+    
+
+
+class Solution:
+    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
+        index={'even':[],'odd':[]}
+        for i,num in enumerate(arr):
+            if num%2==0:
+                index['even'].append(i)
+            else:
+                index['odd'].append(i)
+        for indice in index['odd']:
+            if indice+1 in index['odd'] and indice+2 in index['odd']:
+                return True
+        return False
+    
+
+
+class Solution:
+    def specialArray(self, nums: List[int]) -> int:
+        n=len(nums)
+        for i in range(n+1):
+            number=len([x for x in nums if x>=i])
+            if number==i:
+                return i
+        return -1
+    
+
+
+class Solution:
+    def maximumPopulation(self, logs: List[List[int]]) -> int:
+        population=defaultdict(int)
+        for liste in logs:
+            beginning,end=liste
+            for i in range(beginning,end):
+                population[i]+=1
+        return min([key for key,val in population.items() if val==max(population.values())]) 
+    
+
+
+
+class Solution:
+    def countCompleteDayPairs(self, hours: List[int]) -> int:
+        count=0
+        for i in range(len(hours)-1):
+            for j in range(i+1,len(hours)):
+                if (hours[i]+hours[j])%24==0:
+                    count+=1
+        return count
+
+
+    
+
+class Solution:
+    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        distinct=[0]*n
+        for i in range(n):
+            prefix=len(set(nums[:i+1]))
+            suffix=len(set(nums[i+1:]))
+            distinct[i]=prefix-suffix
+        return distinct
+    
+
+
+
+class Solution:
+    def winningPlayerCount(self, n: int, pick: List[List[int]]) -> int:
+        gagnants=0
+        ballons=defaultdict(list)
+        for i in range(n):
+            for liste in [liste for liste in pick if liste[0]==i]:
+                ballons[i].append(liste[1])
+        for i in range(n):
+            for element in set(ballons[i]):
+                if ballons[i].count(element)>=i+1:
+                    gagnants+=1
+                    break
+        return gagnants
+    
+
+
+
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        if len(text)<7:
+            return 0
+        dictionnaire=defaultdict(int)
+        list_to_consider=[char for char in text if char in 'balloon']
+        if not list_to_consider:
+            return 0
+        for char in list_to_consider:
+            occurence_char_balloon='balloon'.count(char)
+            dictionnaire[char]+=1/occurence_char_balloon
+        return min([int(x) for x in list(dictionnaire.values())])
+    
 
 
 
