@@ -1246,6 +1246,235 @@ class Solution:
 
 
 
+
+
+class Solution:
+    def SmallFrequency(self, word:str)->int:
+        lexique=min(word)
+        return word.count(lexique)
+
+    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
+        sortie=[0]*len(queries)
+        for i,quer in enumerate(queries):
+            count_quer=0
+            for word in words:
+                if self.SmallFrequency(word)>self.SmallFrequency(quer):
+                    count_quer+=1
+            sortie[i]=count_quer
+        return sortie
+    
+
+
+
+
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        frequency=defaultdict(int)
+        words=re.findall(r'\b\w+\b', paragraph.lower())
+        for word in words:
+            if word not in banned:
+                frequency[word]+=1
+        most_common=max(frequency,key=frequency.get)
+        return most_common
+    
+
+
+
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        indice_s=defaultdict(list)
+        indice_t=defaultdict(list)
+        for i,char in enumerate(s):
+            indice_s[char].append(i)
+        for i,char in enumerate(t):
+            indice_t[char].append(i)
+        liste_s=sorted(indice_s.values(),key=lambda x:x[0])
+        liste_t=sorted(indice_t.values(),key=lambda x:x[0])
+        return liste_s==liste_t
+
+    
+
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        liste=list(s.split())
+        indice_p=defaultdict(list)
+        indice_s=defaultdict(list)
+        for i,char in enumerate(pattern):
+            indice_p[char].append(i)
+        for i,word in enumerate(liste):
+            indice_s[word].append(i)
+        liste1=sorted(indice_p.values(),key=lambda x:x[0])
+        liste2=sorted(indice_s.values(),key=lambda x:x[0])
+        return liste1==liste2
+    
+
+
+
+class Solution:
+    def compatibilite(self,word1:str,word2:str)->bool:
+        dict1=defaultdict(list)
+        dict2=defaultdict(list)
+        for i,char in enumerate(word1):
+            dict1[char].append(i)
+        for i,char in enumerate(word2):
+            dict2[char].append(i)
+        liste1=sorted(dict1.values(),key=lambda x:x[0])
+        liste2=sorted(dict2.values(),key=lambda x:x[0])
+        return liste1==liste2
+
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+        answer=[]
+        for word in words:
+            if self.compatibilite(word,pattern):
+                answer.append(word)
+        return answer
+    
+
+
+#Code1
+class Solution:
+    def isCovered(self, ranges: List[List[int]], left: int, right: int) -> bool:
+        seen=set()
+        for liste in ranges:
+            gauche,droite=liste
+            for i in range(gauche,droite+1):
+                seen.add(i)
+        for k in range(left,right+1):
+            if k not in seen:
+                return False
+        return True
+
+#Code2
+class Solution:
+    def isCovered(self, ranges: List[List[int]], left: int, right: int) -> bool:
+        for num in range(left,right+1):
+            is_Covered=False
+            for gauche,droite in ranges:
+                if gauche<=num<=droite:
+                    is_Covered=True
+                    break
+            if not is_Covered:
+                return False
+        return True
+    
+
+
+class Solution:
+    def longestMonotonicSubarray(self, nums: List[int]) -> int:
+        n=len(nums)
+        if n==1:
+            return 1
+        increasing=1
+        decreasing=1
+        max_length=1
+        for i in range(1,n):
+            if nums[i-1]<nums[i]:
+                increasing+=1
+                decreasing=1
+            elif nums[i-1]>nums[i]:
+                decreasing+=1
+                increasing=1
+            else:
+                increasing=1
+                decreasing=1
+            max_length=max(max_length,increasing,decreasing)
+        return max_length
+    
+
+
+
+class Solution:
+    def closest_index(self,nums:List[int]) -> int:
+        nums.sort()
+        n=len(nums)
+        left=0
+        right=n-1
+        while left<=right:
+            middle=(left+right)//2
+            if nums[middle]==0:
+                return middle
+            elif nums[middle]>0:
+                right=middle-1
+            else:
+                left=middle+1
+        if left>=n:
+            return right
+        if right<0:
+            return left
+        if abs(nums[left])<=abs(nums[right]):
+            return left
+        else:
+            return right
+
+    def findClosestNumber(self, nums: List[int]) -> int:
+        index=self.closest_index(nums)
+        return nums[index]
+    
+
+
+
+class Solution:
+    def maxDivScore(self, nums: List[int], divisors: List[int]) -> int:
+        number={divisor:0 for divisor in divisors}
+        for divisor in set(divisors):
+            for num in nums:
+                if num%divisor==0:
+                    number[divisor]+=1
+        maximum=max(number.values())
+        return min([key for key,val in number.items() if val==maximum])
+    
+
+
+
+
+#1ere idee naive
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        while nums[0]!=min(nums):
+            last_element=nums[-1]
+            for i in range(len(nums)-1,0,-1):
+                nums[i]=nums[i-1]
+            nums[0]=last_element
+        return nums==sorted(nums)
+    
+
+#2e idee
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        n=len(nums)
+        count=0
+        for i in range(n):
+            if nums[i]>nums[(i+1)%n]:
+                count+=1
+            if count>1:
+                return False
+        return True
+    
+
+
+class Solution:
+    def checkString(self, s: str) -> bool:
+        if 'a' not in s or 'b' not in s:
+            return True
+        index=defaultdict(list)
+        for i,char in enumerate(s):
+            index[char].append(i)
+        return (index['a'])[-1]<(index['b'])[0]
+    
+
+
+class Solution:
+    def areNumbersAscending(self, s: str) -> bool:
+        current_num=-1
+        liste=s.split()
+        for chiffre in liste:
+            if chiffre.isdigit():
+                if int(chiffre)<=current_num:
+                    return False
+                else:
+                    current_num=int(chiffre)
+        return True
     
 
 
