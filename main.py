@@ -1481,6 +1481,220 @@ class Solution:
 
 
 
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        missing_count=0
+        i=0
+        current=1
+        while missing_count<k:
+            if i<len(arr) and arr[i]==current:
+                i+=1
+            else:
+                missing_count+=1
+                if missing_count==k:
+                    return current
+            current+=1
+
+
+
+
+class Solution:
+    def isPrefixString(self, s: str, words: List[str]) -> bool:
+        n=len(words)
+        if words[0] not in s:
+            return False
+        if words[0]==s:
+            return True
+        for i in range(n-1):
+            word=words[i]
+            for j in range(i+1,n):
+                word+=words[j]
+                if word==s:
+                    return True
+        return False
+    
+
+
+class Solution:
+    def countPrefixes(self, words: List[str], s: str) -> int:
+        count=0
+        for word in words:
+            n=len(word)
+            i=0
+            count_word=0
+            while i<min(n,len(s)) and word[i]==s[i]:
+                i+=1
+                count_word+=1
+            if count_word==n:
+                count+=1
+        return count
+    
+
+
+
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        n=len(searchWord)
+        index=[]
+        liste=list(sentence.split())
+        for i,word in enumerate(liste):
+            if word[:n]==searchWord:
+                index.append(i+1)
+        if not index:
+            return -1
+        else:
+            return min(index)
+        
+
+
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        count=0
+        n=len(pref)
+        for word in words:
+            if word[:n]==pref:
+                count+=1
+        return count
+    
+
+
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        liste=list(s.split())
+        words=[None]*len(liste)
+        for mot in liste:
+            i=int(mot[-1])
+            words[i-1]=mot[:-1]
+        return " ".join(words)
+    
+
+#Version O(n^2)
+class Solution:
+    def maximumDifference(self, nums: List[int]) -> int:
+        if sorted(nums,reverse=True)==nums:
+            return -1
+        max_diff=0
+        for i in range(len(nums)-1):
+            for j in range(i+1,len(nums)):
+                max_diff=max(max_diff,nums[j]-nums[i])
+        return max_diff
+    
+#Version O(n)
+class Solution:
+    def maximumDifference(self, nums: List[int]) -> int:
+        n=len(nums)
+        val_min=nums[0]
+        diff_max=-1
+        for i in range(1,n):
+            if nums[i]>val_min:
+                diff_max=max(diff_max, nums[i]-val_min)
+            else:
+                val_min=nums[i]
+        return diff_max
+    
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n=len(prices)
+        max_diff=0
+        min_value=prices[0]
+        for i in range(1,n):
+            if prices[i]>min_value:
+                max_diff=max(max_diff,prices[i]-min_value)
+            else:
+                min_value=prices[i]
+        return max_diff  
+    
+
+
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        mot1=" "
+        mot2=" "
+        for word in word1:
+            mot1+=word
+        for word in word2:
+            mot2+=word
+        return mot1==mot2
+    
+
+
+class Solution:
+    def isAcronym(self, words: List[str], s: str) -> bool:
+        candidat=""
+        for word in words:
+            candidat+=word[0]
+        return candidat==s
+    
+
+class Solution:
+    def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        return -(max(nums1)-max(nums2))
+    
+
+
+class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        arr.sort()
+        ecart=arr[1]-arr[0]
+        n=len(arr)
+        for i in range(2,n):
+            if arr[i]-arr[i-1] != ecart:
+                return False
+        return True
+    
+
+
+class Solution:
+    def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        count=0
+        for arr in arr1:
+            drapeau=True
+            for element in arr2:
+                if abs(arr-element)<=d:
+                    drapeau=False
+                    break
+            if drapeau:
+                count+=1
+        return count
+    
+
+
+class Solution:
+    def slowestKey(self, releaseTimes: List[int], keysPressed: str) -> str:
+        ecart=defaultdict(int)
+        for i,char in enumerate(keysPressed):
+            if i==0:
+                ecart[0]=releaseTimes[0]
+            else:
+                ecart[i]=releaseTimes[i]-releaseTimes[i-1]
+        maximum=max(ecart.values())
+        liste_keys=[key for key,val in ecart.items() if val==maximum]
+        liste_candidats=[keysPressed[i] for i in liste_keys]
+        return max(liste_candidats)
+    
+
+
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        if min(nums)>=k:
+            return 0
+        return len([num for num in nums if num<k])
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
 
  
 
