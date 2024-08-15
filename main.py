@@ -1684,6 +1684,175 @@ class Solution:
     
 
 
+class Solution:
+    def trimMean(self, arr: List[int]) -> float:
+        n=len(arr)
+        k=n//20
+        arr.sort()
+        return sum(arr[k:n-k])/(n-2*k)
+    
+
+
+class Solution:
+    def maxDistance(self, colors: List[int]) -> int:
+        n=len(colors)
+        left_index_1=0
+        right_index_1=n-1
+        left_index_2=0
+        right_index_2=n-1
+        while colors[right_index_1]==colors[left_index_1]:
+            right_index_1-=1
+        while colors[right_index_2]==colors[left_index_2]:
+            left_index_2+=1
+        return max(abs(right_index_2-left_index_2),abs(right_index_1-left_index_1))
+    
+
+
+class Solution:
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        n=len(arr)
+        sortie=[0]*n
+        sortie[-1]=-1
+        max_value=arr[-1]
+        for i in range(n-2,-1,-1):
+            sortie[i]=max_value
+            max_value=max(max_value,arr[i])
+        return sortie
+    
+
+
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        candidates=0
+        for word in words:
+            liste1=[word.count(char) for char in word]
+            liste2=[chars.count(char) for char in word]
+            drapeau=True
+            for i in range(len(liste1)):
+                if liste1[i]>liste2[i]:
+                    drapeau=False
+                    break
+            if drapeau:
+                candidates+=len(word)
+        return candidates
+    
+
+
+class Solution:
+    def similar(self,s:str,t:str) -> bool:
+        seen_s=set()
+        seen_t=set()
+        for char in s:
+            seen_s.add(char)
+        for char in t:
+            seen_t.add(char)
+        return seen_s==seen_t
+
+    def similarPairs(self, words: List[str]) -> int:
+        count=0
+        for i in range(len(words)-1):
+            for j in range(i+1,len(words)):
+                if self.similar(words[i],words[j]):
+                    count+=1
+        return count
+    
+
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        seen=set()
+        potential_judge=[]
+        for liste in trust:
+            seen.add(liste[0])
+        for i in range(1,n+1):
+            if i not in seen:
+                potential_judge.append(i)
+        if not potential_judge:
+            return -1
+        elif len(potential_judge)>1:
+            return -1
+        else:
+            candidat=potential_judge[0]
+            count=0
+            for liste in trust:
+                if liste[1]==candidat:
+                    count+=1
+            if count==n-1:
+                return candidat
+            else:
+                return -1
+            
+
+
+
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        liste=list(sentence.split())
+        for word in dictionary:
+            n=len(word)
+            for i,s in enumerate(liste):
+                if s[:n]==word:
+                    liste[i]=word
+        return " ".join(liste)
+    
+
+
+
+class Solution:
+    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:
+        return len([hour for hour in hours if hour>=target])
+    
+
+
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        maximum=0
+        for liste in accounts:
+            maximum=max(maximum,sum(liste))
+        return maximum
+    
+
+
+#Version O(nlog(n)) pour ne pas avoir a faire la brute
+class Solution:
+    def countPairs(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        n=len(nums)
+        left=0
+        right=n-1
+        count=0
+        while left<=right:
+            if nums[left]+nums[right]<target:
+                count+=right-left
+                left+=1
+            else:
+                right-=1
+        return count
+    
+
+
+class Solution:
+    def leftRightDifference(self, nums: List[int]) -> List[int]:
+        sortie=[0]*len(nums)
+        sortie[0]=sum(nums[1:])
+        sortie[-1]=sum(nums[:len(nums)-1])
+        for i in range(1,len(nums)-1):
+            sortie[i]=abs(sum(nums[:i]) - sum(nums[i+1:]))
+        return sortie
+    
+
+
+class Solution:
+    def mostWordsFound(self, sentences: List[str]) -> int:
+        maximum=0
+        for sentence in sentences:
+            taille=len(list(sentence.split()))
+            maximum=max(maximum,taille)
+        return maximum
+    
+
+
+
+
     
 
 
