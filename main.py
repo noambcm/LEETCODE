@@ -1851,6 +1851,45 @@ class Solution:
     
 
 
+class Solution:
+    def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        n=len(A)
+        sortie=[0]*n
+        for i in range(n):
+            j=0
+            while j<=i:
+                if A[j] in B[:i+1]:
+                    sortie[i]+=1
+                j+=1
+        return sortie
+    
+
+
+
+class Solution:
+    def numOfPairs(self, nums: List[str], target: str) -> int:
+        count=0
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                if i!=j and nums[i]+nums[j]==target:
+                    count+=1
+        return count
+    
+
+
+class Solution:
+    def minOperations(self, boxes: str) -> List[int]:
+        n=len(boxes)
+        answer=[0]*n
+        for i in range(n):
+            for j in range(n):
+                if j!=i and boxes[j]=='1':
+                    answer[i]+=abs(i-j)
+        return answer
+    
+
+
+
 
 
     
