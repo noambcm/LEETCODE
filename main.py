@@ -1890,6 +1890,231 @@ class Solution:
 
 
 
+class Solution:
+    def greatestLetter(self, s: str) -> str:
+        majuscule=defaultdict(int)
+        minuscule=defaultdict(int)
+        for char in s:
+            if char.isupper():
+                majuscule[char]+=1
+            else:
+                minuscule[char]+=1
+        candidats=[key for key in minuscule.keys() if key.upper() in majuscule.keys()]
+        candidats=sorted(candidats,reverse=True)
+        if candidats:
+            return candidats[0].upper()
+        else:
+            return ""
+        
+
+
+
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        letters='abcdefghijklmnopqrstuvwxyz'
+        for letter in letters:
+            if letter not in sentence:
+                return False
+        return True
+    
+
+
+
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        count=0
+        liste=[list(set(word)) for word in words]
+        for word in liste:
+            for char in word:
+                if char not in allowed:
+                    count+=1
+                    break
+        return len(words)-count
+    
+
+
+class Solution:
+    def countPoints(self, rings: str) -> int:
+        taille=len(rings)
+        count=0
+        couleurs=defaultdict(list)
+        for i in range(0,taille-1,2):
+            couleurs[rings[i+1]].append(rings[i])
+        for key in couleurs.keys():
+            if len(set(couleurs[key]))==3:
+                count+=1
+        return count
+    
+
+
+class Solution:
+    def numberOfSpecialChars(self, word:str) -> int:
+        word=set(word)
+        minuscule=defaultdict(int)
+        majuscule=defaultdict(int)
+        for char in word:
+            if char.isupper():
+                majuscule[char]+=1
+            else:
+                minuscule[char]+=1
+        candidats=[key for key in minuscule.keys() if key.upper() in majuscule.keys()]
+        return len(candidats)
+    
+
+#Version 1
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if word.upper()==word:
+            return True
+        if word.lower()==word:
+            return True
+        if not word[0].isupper():
+            return False
+        for i in range(1,len(word)):
+            if word[i].isupper():
+                return False
+        return True
+    
+
+#Version2
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if word.upper()==word:
+            return True
+        if word.lower()==word:
+            return True
+        if word.istitle():
+            return True
+        else:
+            return False
+        
+
+
+class Solution:
+    def capitalizeTitle(self, title: str) -> str:
+        candidats=list(title.split())
+        new=[]
+        for word in candidats:
+            if len(word) in [1,2]:
+                new.append(word.lower())
+            else:
+                new.append(word.title())
+        return ' '.join(new)
+    
+
+
+class Solution:
+    def numberOfSpecialChars(self, word: str) -> int:
+        count=0
+        minuscule=defaultdict(list)
+        majuscule=defaultdict(list)
+        for i,char in enumerate(word):
+            if char.isupper():
+                majuscule[char].append(i)
+            else:
+                minuscule[char].append(i)
+        candidats=[key for key in minuscule.keys() if key.upper() in majuscule.keys()]
+        for candidat in candidats:
+            if max(minuscule[candidat])<min(majuscule[candidat.upper()]):
+                count+=1
+        return count
+    
+
+
+class Solution:
+    def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
+        count=0
+        for item in items:
+            types,color,name=item
+            if ruleKey=="type" and types==ruleValue:
+                count+=1
+            elif ruleKey=="color" and color==ruleValue:
+                count+=1
+            elif ruleKey=="name" and name==ruleValue:
+                count+=1
+        return count
+    
+
+
+class Solution:
+    def differenceOfSums(self, n: int, m: int) -> int:
+        num1=sum([x for x in range(1,n+1) if x%m!=0])
+        num2=sum([x for x in range(1,n+1) if x%m==0])
+        return num1-num2
+    
+#Probleme tagué comme recherche binaire mais pas naturel pour moi. On peut faire bcp mieux en terme de temps par contre
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        i=1
+        count=0
+        while n-i>=0:
+            count+=1
+            n-=i
+            i+=1
+        return count
+    
+
+
+class Solution:
+    def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
+        count=0
+        n=len(nums)
+        for i in range(n-2):
+            for j in range(i+1,n-1):
+                for k in range(j+1,n):
+                    if nums[j]-nums[i]==diff and nums[k]-nums[j]==diff:
+                        count+=1
+        return count
+    
+
+
+class Solution:
+    def unequalTriplets(self, nums: List[int]) -> int:
+        n=len(nums)
+        count=0
+        for i in range(n-2):
+            for j in range(i+1,n-1):
+                for k in range(j+1,n):
+                    if nums[i]!=nums[j] and nums[i]!=nums[k] and nums[j]!=nums[k]:
+                        count+=1
+        return count
+    
+
+
+class Solution:
+    def maximumTripletValue(self, nums: List[int]) -> int:
+        maximum=0
+        n=len(nums)
+        for i in range(n-2):
+            for j in range(i+1,n-1):
+                for k in range(j+1,n):
+                    candidat=(nums[i]-nums[j])*nums[k]
+                    maximum=max(maximum,candidat)
+        return maximum
+    
+
+
+class Solution:
+    def findingUsersActiveMinutes(self, logs: List[List[int]], k: int) -> List[int]:
+        answer=[0]*k
+        dictionnaire=defaultdict(set)
+        for liste in logs:
+            identite,minute=liste
+            dictionnaire[identite].add(minute)
+        uam={i:0 for i in range(1,k+1)}
+        for val in dictionnaire.values():
+            uam[len(val)]+=1
+        for i in range(k):
+            answer[i]=uam[i+1]
+        return answer
+    
+
+
+
+    
+
+
+
 
 
     
