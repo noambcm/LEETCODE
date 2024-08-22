@@ -2109,9 +2109,216 @@ class Solution:
         return answer
     
 
+class Solution:
+    def removeStars(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if char!='*':
+                stack.append(char)
+            else:
+                stack.pop()
+        return ''.join(stack)
+    
 
+
+class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if stack and char==stack[-1]:
+                stack.pop()
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+
+class Solution:
+    def makeGood(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if stack and char!=stack[-1] and char.upper()==stack[-1]:
+                stack.pop()
+            elif stack and char!=stack[-1] and char.lower()==stack[-1]:
+                stack.pop()
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+
+class Solution:
+    def removeDuplicates(self, s: str, k: int) -> str:
+        stack=[]
+        for char in s:
+            if len(stack)>=k-1 and stack[-(k-1):]==[char]*(k-1):
+                stack=stack[:-(k-1)]
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+
+class Solution:
+    def checkDistances(self, s: str, distance: List[int]) -> bool:
+        n=len(distance)
+        index=defaultdict(list)
+        for i,char in enumerate(s):
+            index[char].append(i)
+        for char in s:
+            indice=ord(char)-ord('a')
+            if distance[indice]!=index[char][1]-index[char][0]-1:
+                return False
+        return True
+    
+
+
+class Solution:
+    def shortestToChar(self, s: str, c: str) -> List[int]:
+        n=len(s)
+        answer=[0]*n
+        index=defaultdict(list)
+        for i,char in enumerate(s):
+            index[char].append(i)
+        liste=index[c]
+        for i in range(n):
+            answer[i]=min([abs(i-element) for element in liste])
+        return answer
+    
+
+#Marche pas sur des cas grands mais formule combinatoire trop difficile
+ class Solution:
+    def valueAfterKSeconds(self, n: int, k: int) -> int:
+        a=[1]*n
+        compteur=0
+        while compteur<k:
+            for i in range(1,n):
+                a[i]=a[i]+a[i-1]
+            compteur+=1
+        return a[n-1]
 
     
+
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        five_dollars=0
+        ten_dollars=0
+        for bill in bills:
+            if bill==5:
+                five_dollars+=1
+            elif bill==10:
+                if five_dollars==0:
+                    return False
+                else:
+                    ten_dollars+=1
+                    five_dollars-=1
+            elif bill==20:
+                if ten_dollars>0 and five_dollars>=1:
+                    ten_dollars-=1
+                    five_dollars-=1
+                elif five_dollars>=3:
+                    five_dollars-=3
+                else:
+                    return False
+        return True
+    
+
+
+class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        n=len(words)
+        answer=[]
+        words=sorted(words,key=lambda x:len(x))
+        for i,word in enumerate(words):
+            for j in range(i+1,n):
+                if word in words[j]:
+                    answer.append(word)
+                    break
+        return answer
+    
+
+
+
+class Solution:
+    def maxCount(self, banned: List[int], n: int, maxSum: int) -> int:
+        count=0
+        current_sum=0
+        seen=set(banned)
+        for i in range(1,n+1):
+            if i not in seen:
+                if current_sum+i<=maxSum:
+                    count+=1
+                    current_sum+=i
+                else:
+                    break
+        return count
+    
+
+
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        seen=set(nums)
+        i=1
+        while i in seen:
+            i+=1
+        return i
+    
+
+class Solution:
+    def getConcatenation(self, nums: List[int]) -> List[int]:
+        return nums + nums
+    
+
+class Solution:
+    def numberGame(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        nums.sort()
+        array=[]
+        alice=[nums[i] for i in range(n) if i%2==0]
+        bob=[nums[i] for i in range(n) if i%2!=0]
+        k=n//2
+        for j in range(k):
+            array.append(bob[j])
+            array.append(alice[j])
+        return array
+    
+
+class Solution:
+    def buildArray(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        array=[0]*n
+        for i,element in enumerate(nums):
+            array[i]=nums[element]
+        return array
+    
+
+
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        liste1=nums[:n]
+        liste2=nums[n:]
+        answer=[]
+        for i in range(n):
+            answer.append(liste1[i])
+            answer.append(liste2[i])
+        return answer
+    
+
+
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        n=len(candies)
+        maximum=max(candies)
+        result=[False]*n
+        for i,candy in enumerate(candies):
+            if candy+extraCandies>=maximum:
+                result[i]=True
+            else:
+                result[i]=False
+        return result
+    
+
+
 
 
 
