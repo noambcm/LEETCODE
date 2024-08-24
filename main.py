@@ -2319,6 +2319,24 @@ class Solution:
     
 
 
+class Solution:
+    def countDigits(self, num: int) -> int:
+        liste=[char for char in str(num) if num%int(char)==0]
+        return len(liste)
+    
+
+
+class Solution:
+    def differenceOfSum(self, nums: List[int]) -> int:
+        element=sum(nums)
+        absolute=0
+        for num in nums:
+            for char in str(num):
+                absolute+=int(char)
+        return abs(element-absolute)
+    
+
+
 
 
 
