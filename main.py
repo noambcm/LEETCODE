@@ -2337,12 +2337,376 @@ class Solution:
     
 
 
-
-
-
-
-
+class Solution:
+    def alternateDigitSum(self, n: int) -> int:
+        somme=0
+        liste=[int(char) for char in str(n)]
+        produit=1
+        for element in liste:
+            somme+=element*produit
+            produit*=-1
+        return somme
     
+
+class Solution:
+    def separateDigits(self, nums: List[int]) -> List[int]:
+        answer=[]
+        for num in nums:
+            for char in str(num):
+                answer.append(int(char))
+        return answer
+    
+
+
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        n=len(coordinates)
+        if n==2:
+            return True
+        x0,y0=coordinates[0]
+        x1,y1=coordinates[1]
+        initial_dx=x1-x0
+        initial_dy=y1-y0
+        i=2
+        while i<=n-1:
+            xi,yi=coordinates[i]
+            ai,bi=coordinates[i-1]
+            if (yi-bi)*initial_dx != (xi-ai)*initial_dy:
+                return False
+            else:
+                i+=1
+        return i==n
+    
+
+
+class Solution:
+    def formation(self,nums:List[int]) -> bool:
+        n=len(nums)
+        for i in range(n):
+            l=sum([nums[j] for j in range(n) if j!=i])
+            if l<=nums[i]:
+                return False
+        return True
+
+    def triangleType(self, nums: List[int]) -> str:
+        nums.sort()
+        if len(set(nums))==1:
+            return "equilateral"
+        if not self.formation(nums):
+            return "none"
+        else:
+            if len(set(nums))==2:
+                return "isosceles"
+            else:
+                return "scalene"
+            
+
+
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        groupes=defaultdict(int)
+        for card in deck:
+            groupes[card]+=1
+        if min(groupes.values())<=1:
+            return False
+        pgcd=reduce(math.gcd,list(groupes.values()))
+        return pgcd>1
+    
+
+
+class Solution:
+    def reverseOnlyLetters(self, s: str) -> str:
+        answer=[]
+        letters=[char for char in s if char.isalpha()]
+        for char in s:
+            if char.isalpha():
+                answer.append(letters.pop())
+            else:
+                answer.append(char)
+        return ''.join(answer)
+    
+
+
+
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        string=''
+        for char in s:
+            position=str(ord(char)-ord('a')+1)
+            string=string+position
+        j=1
+        while j<=k:
+            x=sum([int(char) for char in string])
+            string=str(x)
+            j+=1
+        return x
+    
+
+
+class Solution:
+    def isCircularSentence(self, sentence: str) -> bool:
+        sentence=list(sentence.split())
+        n=len(sentence)
+        if n==1:
+            return sentence[0][0]==sentence[0][-1]
+        if sentence[-1][-1]!=sentence[0][0]:
+            return False
+        for i in range(n-1):
+            if sentence[i][-1]!=sentence[i+1][0]:
+                return False
+        return True
+    
+
+
+
+class Solution:
+    def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
+        text=list(text.split())
+        n=len(text)
+        answer=[]
+        for i in range(n-2):
+            if text[i]==first and text[i+1]==second:
+                answer.append(text[i+2])
+        return answer
+
+
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        s=list(s.split())
+        return len(s[-1])
+    
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if needle not in haystack:
+            return -1
+        n=len(haystack)
+        m=len(needle)
+        for i in range(n-m+1):
+            if haystack[i:i+m]==needle:
+                return i
+            
+
+#version1: peu efficace et TLE 
+class Solution:
+    def oneShift(self, s:str) -> str:
+        liste=[char for char in s]
+        n=len(liste)
+        string=[0]*n
+        for i in range(n-1):
+            string[i]=liste[i+1]
+        string[-1]=liste[0]
+        return ''.join(string)
+
+    def rotateString(self, s: str, goal: str) -> bool:
+        while s[0]!=goal[0]:
+            goal=self.oneShift(goal)
+        return s==goal
+    
+
+#Version2: plus astucieuse
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        if len(s)!=len(goal):
+            return False
+        s=s+s
+        return (goal in s)
+    
+
+class Solution:
+    def minimumMoves(self, s: str) -> int:
+        if 'X' not in s:
+            return 0
+        n=len(s)
+        number=0
+        i=0
+        while i<n:
+            if s[i]=='X':
+                number+=1
+                i+=3
+            else:
+                i+=1
+        return number
+    
+
+
+class Solution:
+    def thousandSeparator(self, n: int) -> str:
+        if len(str(n))<=3:
+            return str(n)
+        string=list(reversed(str(n)))
+        taille=len(string)
+        answer=[string[0]]
+        for i in range(1,taille):
+            if i%3==0:
+                answer.append('.')
+                answer.append(string[i])
+            else:
+                answer.append(string[i])
+        answer.reverse()
+        return ''.join(answer)
+    
+
+
+
+class Solution:
+    def reformat(self, s: str) -> str:
+        if len(s)==1:
+            return s
+        if len([char for char in s if char.isdigit()]) in [0,len(s)]:
+            return ""
+        answer=[]
+        produit=1
+        liste2=list(reversed([char for char in s if char.isdigit()]))
+        liste1=list(reversed([char for char in s if char.isalpha()]))
+        if abs(len(liste1)-len(liste2))>=2:
+            return ""
+        if len(liste2)>len(liste1):
+            produit=-1
+        while len(answer)<len(s):
+            if produit==1:
+                if liste1:
+                    answer.append(liste1.pop())
+            else:
+                if liste2:
+                    answer.append(liste2.pop())
+            produit*=-1
+        return ''.join(answer)
+
+
+
+#Version1
+class Solution:
+    def makeFancyString(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if len(stack)>=2 and stack[-1]==stack[-2]==char:
+                stack.append(char)
+                stack.pop() 
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+#Version2
+class Solution:
+    def makeFancyString(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if len(stack)>=2 and stack[-1]==stack[-2]==char:
+                continue
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+
+class Solution:
+    def isValid(self, word: str) -> bool:
+        vowels='aeiouAEIOU'
+        if len(word)<3:
+            return False
+        vowels_number=len([char for char in word if char in vowels])
+        conso_number=len([char for char in word if char.isalpha() and char not in vowels])
+        if vowels_number==0:
+            return False
+        if conso_number==0:
+            return False
+        for char in word:
+            if not char.isdigit() and not char.isalpha():
+                return False
+        return True
+    
+
+
+
+class Solution:
+    def convertTime(self, current: str, correct: str) -> int:
+        operations=0
+        temps2=int(correct[:2])*60+int(correct[3:])
+        temps1=int(current[:2])*60+int(current[3:])
+        ecart=temps2-temps1
+        liste=[60,15,5,1]
+        i=0
+        while i<len(liste):
+            x=ecart//liste[i]
+            ecart-=x*liste[i]
+            operations+=x
+            i+=1
+        return operations
+    
+
+
+
+class Solution:
+    def maxLengthBetweenEqualCharacters(self, s: str) -> int:
+        index=defaultdict(list)
+        for i,char in enumerate(s):
+            index[char].append(i)
+        if max([len(val) for val in index.values()])<2:
+            return -1
+        maximum=0
+        for val in index.values():
+            maximum=max(maximum,max(val)-min(val)-1)
+        return maximum
+    
+
+
+
+class Solution:
+    def largestGoodInteger(self, num: str) -> str:
+        stack=[]
+        answer=[]
+        for char in num:
+            if len(stack)>=2 and stack[-1]==stack[-2]==char:
+                answer.append(char*3)
+            else:
+                stack.append(char)
+        if len(answer)==0:
+            return ""
+        return sorted(answer)[-1]
+    
+
+
+class Solution:
+    def scoreOfString(self, s: str) -> int:
+        n=len(s)
+        somme=0
+        for i in range(n-1):
+            somme+=abs(ord(s[i+1])-ord(s[i]))
+        return somme
+    
+
+
+
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        if ch not in word:
+            return word
+        index=0
+        for i,char in enumerate(word):
+            if char==ch:
+                index=i
+                break
+        mot=''.join(list(reversed(word[:i+1])))
+        return mot+word[i+1:]
+    
+
+
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        index=defaultdict(str)
+        answer=['']*len(s)
+        for i in range(len(s)):
+            answer[indices[i]]=s[i]
+        return ''.join(answer)
+    
+
+
+
+
+
 
 
 
