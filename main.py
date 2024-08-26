@@ -2703,11 +2703,72 @@ class Solution:
         return ''.join(answer)
     
 
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        answer=0
+        m=len(grid[0])
+        while m>0:
+            maximum=0
+            for liste in grid:
+                liste.sort()
+                if liste:
+                    maximum=max(liste.pop(),maximum)
+            answer+=maximum
+            m-=1
+        return answer
+    
+
+
+class Solution:
+    def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
+        candidats=[min(liste) for liste in matrix]
+        confirmes=[]
+        dic=defaultdict(list)
+        for ligne in matrix:
+            for i,element in enumerate(ligne):
+                dic[i].append(element)
+        for i,candidat in enumerate(candidats):
+            index=matrix[i].index(candidat)
+            if candidat==max(dic[index]):
+                confirmes.append(candidat)
+        return confirmes
+    
 
 
 
+class Solution:
+    def reverse(self, nums:List[int]) -> List[int]:
+        return list(reversed(nums))
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        matrix=[]
+        for liste in image:
+            liste=list(reversed(liste))
+            for i,element in enumerate(liste):
+                if element==0:
+                    liste[i]=1
+                else:
+                    liste[i]=0
+            matrix.append(liste)
+        return matrix
 
 
+
+class Solution:
+    def firstPalindrome(self, words: List[str]) -> str:
+        for word in words:
+            if word==word[::-1]:
+                return word
+        return ""
+    
+
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        answer=[]
+        s=list(s.split())
+        for word in s:
+            answer.append(word[::-1])
+        return ' '.join(answer)
 
 
 
