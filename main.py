@@ -2990,3 +2990,6 @@ class Solution:
         for char in targetWord:
             string3+=str(ord(char)-ord('a'))
         return int(string1) + int(string2) == int(string3)
+    
+
+#bug de github
