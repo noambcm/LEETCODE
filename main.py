@@ -2992,4 +2992,4 @@ class Solution:
         return int(string1) + int(string2) == int(string3)
     
 
-#bug de github
+#bug de github. jsp ce qui se passe
