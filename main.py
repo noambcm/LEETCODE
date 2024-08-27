@@ -2771,13 +2771,222 @@ class Solution:
         return ' '.join(answer)
 
 
+#Methode 1
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        s=list(s)
+        n=len(s)
+        for i in range(0,n,2*k):
+            s[i:i+k]=reversed(s[i:i+k])
+        return ''.join(s)
+    
+#Methode 2:two pointers
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        s=list(s)
+        n=len(s)
+        for i in range(0,n,2*k):
+            left,right=i,min(i+k-1,n-1)
+            while left<=right:
+                s[left],s[right]=s[right],s[left]
+                left+=1
+                right-=1
+        return ''.join(s)
+    
+
+
+class Solution:
+    def Palindrome(self,s:str) ->str:
+        s=list(s)
+        return ''.join(reversed(s))
+
+    def isPalindrome(self, s: str) -> bool:
+        if s=="":
+            return True
+        liste=[char.lower() for char in s if char.isalnum()]
+        string=''.join(liste)
+        return string==self.Palindrome(string)
 
 
 
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        liste=[]
+        m=min(len(word1),len(word2))
+        pointer=0
+        while pointer<m:
+            letter1=word1[pointer]
+            letter2=word2[pointer]
+            liste.append(letter1)
+            liste.append(letter2)
+            pointer+=1
+        return ''.join(liste) + word1[m:] + word2[m:]
+    
+
+
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """   
+        Do not return anything, modify s in-place instead.
+        """
+        left=0
+        right=len(s)-1
+        while left<=right:
+            s[left],s[right]=s[right],s[left]
+            left+=1
+            right-=1
 
 
 
-
-
+class Solution:
+    def applyOperations(self, nums: List[int]) -> List[int]:
+        i=0
+        j=i+1
+        while i<len(nums)-1:
+            if nums[i]==nums[j]:
+                nums[i]*=2
+                nums[j]=0
+            i+=1
+            j+=1
+        return [x for x in nums if x!=0] + [x for x in nums if x==0]
  
 
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        answer=[]
+        positive=[num for num in nums if num>0]
+        negative=[num for num in nums if num<0]
+        i=0
+        while i<len(positive):
+            answer.append(positive[i])
+            answer.append(negative[i])
+            i+=1
+        return answer
+    
+
+
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+        result=[0]*len(nums)
+        for i in range(len(nums)):
+            result[i]=sum(nums[:i+1])
+        return result
+    
+
+
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        vowels='aeiouAEIOU'
+        number1=0
+        number2=0
+        for char in s[:len(s)//2]:
+            if char in vowels:
+                number1+=1
+        for char in s[len(s)//2:]:
+            if char in vowels:
+                number2+=1
+        return number1==number2
+    
+
+
+
+class Solution:
+    def sortVowels(self, s: str) -> str:
+        vowels='aeiouAEIOU'
+        s=list(s)
+        candidats=sorted([char for char in s if char in vowels])
+        j=0
+        for i in range(len(s)):
+            if s[i] in vowels:
+                s[i]=candidats[j]
+                j+=1
+        return ''.join(s)
+    
+
+
+class Solution:
+    def arrangeWords(self, text: str) -> str:
+        text=list(text.split())
+        text=sorted(text, key=lambda x:len(x))
+        text[0]=text[0].title()
+        for i in range(1,len(text)):
+            text[i]=text[i].lower()
+        return ' '.join(text)
+    
+
+#consigne non respectee
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n0=nums.count(0)
+        n1=nums.count(1)
+        n2=len(nums)-n1-n0
+        for i in range(n0):
+            nums[i]=0
+        for i in range(n0,n0+n1):
+            nums[i]=1
+        for i in range(n0+n1,len(nums)):
+            nums[i]=2
+
+
+
+class Solution:
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+        costs.sort()
+        number=0
+        i=0
+        while i<len(costs) and coins-costs[i]>=0:
+            number+=1
+            coins-=costs[i]
+            i+=1
+        return number
+    
+
+class Solution:
+    def power(self, n:int) -> int:
+        power=0
+        while n!=1:
+            if n%2==0:
+                n=n//2
+            else:
+                n=3*n+1
+            power+=1
+        return power
+
+    def getKth(self, lo: int, hi: int, k: int) -> int:
+        liste=sorted([x for x in range(lo,hi+1)],key=lambda x:self.power(x))
+        return liste[k-1]
+    
+
+
+class Solution:
+    def critere(self, word:str) -> bool:
+        word=list(word)
+        vowels='aeiou'
+        if word[0] in vowels and word[-1] in vowels:
+            return True
+        return False
+
+    def vowelStrings(self, words: List[str], left: int, right: int) -> int:
+        number=0
+        for i in range(left,right+1):
+            if self.critere(words[i]):
+                number+=1
+        return number
+    
+
+
+class Solution:
+    def isSumEqual(self, firstWord: str, secondWord: str, targetWord: str) -> bool:
+        string1=''
+        string2=''
+        string3=''
+        for char in firstWord:
+            string1+=str(ord(char)-ord('a'))
+        for char in secondWord:
+            string2+=str(ord(char)-ord('a'))
+        for char in targetWord:
+            string3+=str(ord(char)-ord('a'))
+        return int(string1) + int(string2) == int(string3)
