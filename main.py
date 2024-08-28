@@ -2992,4 +2992,169 @@ class Solution:
         return int(string1) + int(string2) == int(string3)
     
 
-#bug de github. jsp ce qui se passe
+#Version1
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowels='aeiouAEIOU'
+        s=list(s)
+        voyelle=defaultdict(str)
+        for i,char in enumerate(s):
+            if char in vowels:
+                voyelle[i]=char
+        reversed_vowels=list(reversed(list(voyelle.values())))
+        for index,val in zip(voyelle.keys(),reversed_vowels):
+            s[index]=val
+        return ''.join(s)
+    
+
+#Version 2: TRES TRES elegante
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowels='aeiouAEIOU'
+        s=list(s)
+        left=0
+        right=len(s)-1
+        while left<=right:
+            if s[left] not in vowels:
+                left+=1
+            elif s[right] not in vowels:
+                right-=1
+            else:
+                s[left],s[right]=s[right],s[left]
+                left+=1
+                right-=1
+        return ''.join(s)
+    
+
+
+class Solution:
+    def findIndices(self, nums: List[int], indexDifference: int, valueDifference: int) -> List[int]:
+        n=len(nums)
+        for left in range(n):
+            right=n-1
+            while left<=right:
+                if abs(left-right)>=indexDifference and abs(nums[left]-nums[right])>=valueDifference:
+                    return [left,right]
+                right-=1
+        return [-1,-1]
+    
+
+
+class Solution:
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        petits=[x for x in nums if x<pivot]
+        grands=[x for x in nums if x>pivot]
+        return petits + [pivot]*nums.count(pivot) + grands
+    
+
+class Solution:
+    def modifyString(self, s: str) -> str:
+        s=list(s)
+        alphabet='abcdefghijklmnopqrstuvwxyz'
+        if len(s)==1 and s[0]=='?':
+            return "a"
+        for i,char in enumerate(s):
+            if char=='?':
+                if i==0:
+                    s[i]=random.choice([c for c in alphabet if c!=s[i+1]])
+                elif i==len(s)-1:
+                    s[i]=random.choice([c for c in alphabet if c!=s[i-1]])
+                else:
+                    s[i]=random.choice([c for c in alphabet if c!=s[i+1] and c!=s[i-1]])
+        return ''.join(s)
+    
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs)==1:
+            return strs[0]
+        strs=sorted(strs,key=lambda x:len(x))
+        candidat=list(strs[0])
+        answer=[]
+        for i in range(len(candidat)):
+            if len(set([mot[i] for mot in strs]))==1:
+                answer.append(candidat[i])
+            else:
+                break
+        return ''.join(answer)
+    
+
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        s=list(s)
+        o=list(order)
+        dictionnaire={i:char for i,char in enumerate(s) if char in order}
+        order_characters=sorted(list(dictionnaire.values()), key=lambda x:o.index(x))
+        for i,val in zip(dictionnaire.keys(), order_characters):
+            s[i]=val
+        return ''.join(s)
+    
+
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        candidat=list(words[0])
+        answer=[]
+        for char in candidat:
+            drapeau=True
+            for i in range(1,len(words)):
+                if char not in words[i]:
+                    drapeau=False
+                    break
+                else:
+                    words[i]=words[i].replace(char,'',1)
+            if drapeau:
+                answer.append(char)
+        return answer
+    
+
+#Code absolument HORRIBLE mais marche a priori pour un pb avec 50% d'acceptation
+class Solution:
+    def checkValid(self, matrix: List[List[int]]) -> bool:
+        n=len(matrix)
+        for liste in matrix:
+            for i in range(1,n+1):
+                if i not in liste:
+                    return False
+        colonnes=defaultdict(list)
+        for i in range(n):
+            for liste in matrix:
+                colonnes[i].append(liste[i])
+        for i in range(1,n+1):
+            for val in colonnes.values():
+                if i not in val:
+                    return False
+        return True
+    
+
+#Contraintes non respectees
+class Solution:
+    def operation(self, s:str) -> str:
+        stack=[]
+        for char in s:
+            if char!='#':
+                stack.append(char)
+            else:
+                if stack:
+                    stack.pop()
+        return ''.join(stack)
+
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        return self.operation(s)==self.operation(t)
+    
+
+class Solution:
+    def largeGroupPositions(self, s: str) -> List[List[int]]:
+        s=list(s)
+        index=[]
+        i=0
+        while i<len(s):
+            j=i 
+            while j<len(s) and s[j]==s[i]:
+                j+=1
+            if j-i>=3:
+                index.append([i,j-1])
+            i=j
+        return index
+    
+
