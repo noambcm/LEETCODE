@@ -3158,3 +3158,50 @@ class Solution:
         return index
     
 
+class Solution:
+    def result(self, num:int, divisor:int) -> int:
+        if num%divisor==0:
+            return num//divisor
+        else:
+            return num//divisor + 1
+
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        left=1
+        right=max(nums)
+        while left<right:
+            middle=(left+right)//2
+            somme=somme=sum([self.result(num,middle) for num in nums])
+            if somme>threshold:
+                left=middle+1
+            else:
+                right=middle
+        return left
+    
+
+class Solution:
+    def clearDigits(self, s: str) -> str:
+        stack=[]
+        for char in s:
+            if char.isdigit():
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(char)
+        return ''.join(stack)
+    
+
+class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        number=0
+        for string in logs:
+            if string=="../":
+                if number>0:
+                    number-=1
+            elif string!="./":
+                number+=1
+        return number
+    
+
+
+    
+
