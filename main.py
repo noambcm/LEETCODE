@@ -3202,6 +3202,70 @@ class Solution:
         return number
     
 
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        number=0
+        impair=False
+        occurence=defaultdict(int)
+        for char in s:
+            occurence[char]+=1
+        for val in occurence.values():
+            if val%2==0:
+                number+=val
+            else:
+                number+=val-1
+                impair=True
+        if impair:
+            number+=1
+        return number
+    
+
+#Code HORRIBLE
+class Solution:
+    def operation(self, string:str) -> List[int]:
+        return [ord(char)-ord('a') for char in string]
+
+    def oddString(self, words: List[str]) -> str:
+        n=len(words)
+        difference=[]
+        for string in words:
+            liste=self.operation(string)
+            diff=[liste[j+1]-liste[j] for j in range(len(liste)-1)]
+            difference.append(diff)
+        reference=difference[0]
+        count=[]
+        for i in range(1,n):
+            if difference[i]==reference:
+                count.append(i)
+        if count==[]:
+            return words[0]
+        index=[i for i in range(1,n) if i not in count][0]
+        return words[index]
+    
+
+class Solution:
+    def distinctAverages(self, nums: List[int]) -> int:
+        seen=set()
+        nums.sort()
+        while len(nums)>=2:
+            maximum=nums.pop()
+            minimum=nums.pop(0)
+            moyenne=(minimum+maximum)/2
+            seen.add(moyenne)
+        return len(seen)
+    
+
+class Solution:
+    def sumOfSquares(self, nums: List[int]) -> int:
+        somme=0
+        for i in range(len(nums)):
+            index=i+1
+            if len(nums)%index==0:
+                somme+=nums[i]**2
+        return somme
+    
+
+
 
     
 
