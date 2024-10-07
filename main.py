@@ -3275,7 +3275,116 @@ class Solution:
                 count_distinct = len(seen)
                 total_sum += count_distinct **2
         return total_sum
+    
+
+
+class Solution:
+    def isNice(self, s:str) -> bool:
+        for char in set(s):
+            if char.isupper():
+                if char.lower() not in s:
+                    return False
+            else:
+                if char.upper() not in s:
+                    return False
+        return True
+
+    def longestNiceSubstring(self, s: str) -> str:
+        longest=""
+        n=len(s)
+        for i in range(n-1):
+            for j in range(i+1,n):
+                substring=s[i:j+1]
+                if self.isNice(substring) and len(substring)>len(longest):
+                    longest=substring
+        return longest
 
 
     
+class Solution:
+    def reverse(self, s:str) -> str:
+        return s[::-1]
 
+    def reverseParentheses(self, s: str) -> str:
+        stack=[]
+        s=list(s)
+        for i,char in enumerate(s):
+            if char=='(':
+                stack.append(i)
+            elif char==')':
+                j=stack.pop()
+                s[j+1:i]=self.reverse(s[j+1:i])
+        return ''.join([char for char in s if char not in '()'])
+    
+
+
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack=[]
+        s=list(s)
+        for i,char in enumerate(s):
+            if char=='[':
+                stack.append(i)
+            elif char==']':
+                j=stack.pop()
+                s[j-1:i+1]=int(s[j-1])*s[j+1:i]
+        if '[' not in s:
+            return ''.join([char for char in s])
+        else:
+            i=s.index('[')
+            j=s.index(']')
+            s[i-1:j+1]=int(s[i-1])*s[i+1:j]
+            return ''.join([char for char in s])
+        
+
+
+class Solution:
+    def complexNumberMultiply(self, num1: str, num2: str) -> str:
+        indice1=num1.index('+')
+        indice2=num2.index('+')
+        reel1=int(num1[:indice1])
+        reel2=int(num2[:indice2])
+        im1=int(num1[indice1+1:-1])
+        im2=int(num2[indice2+1:-1])
+        x=reel1*reel2 - im1*im2
+        y=reel1*im2 + reel2*im1
+        return f"{x}+{y}i"
+    
+
+
+#Aide chat GPT
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        number=0
+        count=0
+        for char in s:
+            if char=='b':
+                number+=1
+            elif char=='a':
+                if number>0:
+                    number-=1
+                    count+=1
+        return count
+    
+
+
+#1e version a reprendre
+class Solution:
+    def rle(self, s:str)->str:
+        occurence=defaultdict(int)
+        answer=""
+        for char in s:
+            occurence[char]+=1
+        for char in set(s):
+            answer+=str(occurence[char])
+            answer+=char
+        return answer
+
+    def countAndSay(self, n: int) -> str:
+        if n==1:
+            return "1"
+        else:
+            answer='1'
+            for _ in range(2,n+1):
+                answer=self.rle(answer)
+            return answer
