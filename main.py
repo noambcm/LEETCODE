@@ -3388,3 +3388,125 @@ class Solution:
             for _ in range(2,n+1):
                 answer=self.rle(answer)
             return answer
+        
+
+#1e version naive
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        answer=[]
+        n=len(s)
+        for i in range(n):
+            for j in range(i+1,n+1):
+                substring=s[i:j]
+                if substring==substring[::-1] and substring!="":
+                    answer.append(substring)
+        return answer
+    
+
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        words=s.split()
+        words=words[::-1]
+        return ' '.join(words)
+    
+
+#1ere methode: tres couteuse en terme de conversion integer -> string
+class Solution:
+    def factorial(self,n:int) -> int:
+        x=1
+        for i in range(2,n+1):
+            x=x*i
+        return x
+
+    def trailingZeroes(self, n: int) -> int:
+        if n==0:
+            return 0
+        number=str(self.factorial(n))
+        count=0
+        i=len(number)-1
+        while i>=0 and number[i]=='0':
+            count+=1
+            i-=1
+        return count
+    
+#un trailing zero est fait avec un facteur 10 : 2 et 5 mais comme il apparait toujours un 2 dans les facteurs pairs,
+#il suffit de compter le nombre de multiples de 5
+    class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        if n==0:
+            return 0
+        count=0
+        while n>0:
+            n//=5
+            count+=n
+        return count
+    
+
+
+class Solution:
+    def reorderSpaces(self, text: str) -> str:
+        words=text.split()
+        spaces=text.count(' ')
+        m=len(words)
+        if m==1:
+            return ' '.join(words) + ' '*spaces
+        distribution=spaces//(m-1)
+        fin=spaces%(m-1)
+        result=(' '*distribution).join(words)
+        result+=' '*fin
+        return result
+    
+
+#926/1306
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        letters=defaultdict(int)
+        for char in word1:
+            letters[char]+=1
+        for char in word2:
+            letters[char]-=1
+        return sum([abs(val) for val in letters.values() if val!=0])
+    
+
+
+
+class Solution:
+    def shift(self,s:str,n:str) ->str:
+        word='abcdefghijklmnopqrstuvwxyz'
+        indice1=word.index(s)
+        return word[indice1+int(n)]
+
+    def replaceDigits(self, s: str) -> str:
+        s=list(s)
+        n=len(s)
+        answer=['']*n
+        for i in range(n):
+            if i%2==0:
+                answer[i]=s[i]
+            else:
+                letter=self.shift(s[i-1],s[i])
+                answer[i]=letter
+        return ''.join(answer)
+    
+
+
+
+class Solution:
+    def shift(self,s:str,n:int):
+        mot='abcdefghijklmnopqrstuvwxyz'
+        indice=mot.index(s)
+        return mot[(indice+n)%26]
+
+    def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+        s=list(s)
+        n=len(s)
+        rotation=0
+        for i in range(n-1,-1,-1):
+            rotation+=shifts[i]
+            ajout=rotation%26
+            s[i]=self.shift(s[i],ajout)
+        return ''.join(s)
+    
+
+    
