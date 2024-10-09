@@ -3509,4 +3509,99 @@ class Solution:
         return ''.join(s)
     
 
+
+class Solution:
+    def numOfStrings(self, patterns: List[str], word: str) -> int:
+        count=0
+        for mot in patterns:
+            if mot in word:
+                count+=1
+        return count
     
+
+
+class Solution:
+    def makeEqual(self, words: List[str]) -> bool:
+        occurence=defaultdict(int)
+        m=len(words)
+        if m==1:
+            return True
+        for mot in words:
+            for char in mot:
+                occurence[char]+=1
+        for val in list(occurence.values()):
+            if val%m!=0:
+                return False
+        return True
+    
+
+
+
+class Solution:
+    def nextLetter(self, s:str) -> str:
+        word='abcdefghijklmnopqrstuvwxyz'
+        indice=word.index(s)
+        return word[(indice+1)%26]
+
+    def operation(self, s:str) -> str:
+        n=len(s)
+        for i in range(n):
+            s+=self.nextLetter(s[i])
+        return s
+            
+    def kthCharacter(self, k: int) -> str:
+        word='a'
+        while len(word)<k:
+            word=self.operation(word)
+        return word[k-1]
+
+
+
+class Solution:
+    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+        answer=[]
+        m=len(matrix)
+        n=len(matrix[0])
+        for i in range(n):
+            colonne=[]
+            for j in range(m):
+                colonne.append(matrix[j][i])
+            answer.append(colonne)
+        return answer
+    
+
+#TLE
+class Solution:
+    def isAnagram(self, s:str, p:str) -> bool:
+        occurence=defaultdict(int)
+        for char in s:
+            occurence[char]+=1
+        for char in p:
+            occurence[char]-=1
+        return max(list(occurence.values()))==0
+
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        indices=[]
+        n=len(s)
+        m=len(p)
+        i=0
+        while i<=n-m:
+            if self.isAnagram(s[i:i+m],p):
+                indices.append(i)
+            i+=1
+        return indices
+    
+
+
+class Solution:
+    def scoreOfParentheses(self, s: str) -> int:
+        stack=[0]
+        for char in s:
+            if char=='(':
+                stack.append(0)
+            elif char==')':
+                v=stack.pop()
+                stack[-1]+=max(2*v,1)
+        return stack[-1]
+    
+
