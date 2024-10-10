@@ -3605,3 +3605,62 @@ class Solution:
         return stack[-1]
     
 
+
+class Solution:
+    def maxScoreSightseeingPair(self, values: List[int]) -> int:
+        n=len(values)
+        max_left=values[0]
+        maximum=0
+        for i in range(1,n):
+            maximum=max(maximum, max_left+values[i]-i)
+            max_left=max(values[i]+i,max_left)
+        return maximum
+    
+
+
+class Solution:
+    def letter(self, s:str) -> str:
+        n=int(s)
+        return chr(n + 96)
+
+    def freqAlphabets(self, s: str) -> str:
+        answer=[]
+        mot=list(s)
+        i=len(s)-1
+        while i>=0:
+            if mot[i]=='#':
+                answer.append(self.letter(s[i-2:i]))
+                i-=3
+            else:
+                answer.append(self.letter(s[i]))
+                i-=1
+        return ''.join(reversed(answer))
+    
+
+
+class Solution:
+    def maximum69Number (self, num: int) -> int:
+        s=str(num)
+        mot=list(s)
+        i=0
+        while i<len(s):
+            if int(mot[i])==6:
+                mot[i]='9'
+                return int(''.join(mot))
+            i+=1
+        return num
+    
+
+#78/80
+class Solution:
+    def removeOccurrences(self, s: str, part: str) -> str:
+        m=len(part)
+        while part in s:
+            i=0
+            while i<len(s)-m+1:
+                if s[i:i+m]==part:
+                    s=s[0:i]+s[i+m:]
+                i+=1
+        return s
+    
+
