@@ -3664,3 +3664,92 @@ class Solution:
         return s
     
 
+
+
+class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        somme=0
+        seen=set()
+        n=len(mat)
+        for i in range(n):
+            somme+=mat[i][i]
+            seen.add((i,i))
+        i=0
+        while i<=n-1:
+            if (i,n-1-i) not in seen:
+                somme+=mat[i][n-1-i]
+            i+=1
+        return somme
+    
+
+
+class Solution:
+    def checkXMatrix(self, grid: List[List[int]]) -> bool:
+        n=len(grid)
+        for i in range(n):
+            if grid[i][i]==0 or grid[i][n-1-i]==0:
+                return False
+            for j in range(n):
+                if j!=i and j!=n-1-i:
+                    if grid[i][j]!=0:
+                        return False
+        return True
+    
+
+
+class Solution:
+    def sortTheStudents(self, score: List[List[int]], k: int) -> List[List[int]]:
+        answer=[]
+        m=len(score) #lignes
+        n=len(score[0]) #colonnes
+        resultat=defaultdict(int)
+        for i in range(m):
+            resultat[i]=score[i][k]
+        liste=sorted(resultat.keys(), key=lambda x: -resultat[x])
+        for j in liste:
+            answer.append(score[j])
+        return answer
+    
+
+
+class Solution:
+    def matrixSum(self, nums: List[List[int]]) -> int:
+        n=len(nums) #lignes
+        m=len(nums[0]) #colonnes
+        score=0
+        for i in range(n):
+            nums[i].sort(reverse=True)
+        for j in range(m):
+            maximum=0
+            for i in range(n):
+                maximum=max(nums[i][j],maximum)
+            score+=maximum
+        return score
+    
+
+
+class Solution:
+    def transpose(self, grid: List[List[int]]) -> List[List[int]]:
+        n=len(grid)
+        m=len(grid[0])
+        answer=[]
+        for j in range(m):
+            liste=[]
+            for i in range(n):
+                liste.append(grid[i][j])
+            answer.append(liste)
+        return answer 
+
+    def equalPairs(self, grid: List[List[int]]) -> int:
+        m=len(grid)
+        n=len(grid[0])
+        transposee=self.transpose(grid)
+        number=0
+        for i in range(m):
+            for j in range(m):
+                if transposee[i]==grid[j]:
+                    number+=1
+        return number
+    
+
+
