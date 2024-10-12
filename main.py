@@ -3753,3 +3753,39 @@ class Solution:
     
 
 
+class Solution:
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+        m=len(grid)
+        n=len(grid[0])
+        diff=[[0 for _ in range(n)] for _ in range(m)]
+        row=defaultdict(list)
+        column=defaultdict(list)
+        for i in range(m):
+            number=grid[i].count(0)
+            row[i].append(number)
+            row[i].append(n-number)
+        for j in range(n):
+            number=sum([grid[i][j] for i in range(m)])
+            column[j].append(m-number)
+            column[j].append(number)
+        for i in range(m):
+            for j in range(n):
+                diff[i][j]=row[i][1]+column[j][1]-row[i][0]-column[j][0]
+        return diff
+    
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n=len(matrix)
+        copy_matrix=copy.deepcopy(matrix)
+        for i in range(n):
+            matrix[i]=list(reversed([copy_matrix[j][i] for j in range(n)]))
+
+
+
+
+
