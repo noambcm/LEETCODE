@@ -3788,4 +3788,80 @@ class Solution:
 
 
 
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        m=len(mat)
+        n=len(mat[0])
+        reshape=[]
+        if m*n!=r*c:
+            return mat
+        liste=[mat[i][j] for i in range(m) for j in range(n)]
+        for i in range(r):
+            ligne=liste[i*c:(i+1)*c]
+            reshape.append(ligne)
+        return reshape
+    
+
+
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        if len(original)!=m*n:
+            return []
+        reshape=[]
+        for i in range(m):
+            reshape.append(original[i*n:(i+1)*n])
+        return reshape
+    
+
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        m=len(mat)
+        n=len(mat[0])
+        number=0
+        for row in mat:
+            if sum(row)==1:
+                indice=row.index(1)
+                if sum([mat[j][indice] for j in range(m)])==1:
+                    number+=1
+        return number
+    
+
+
+class Solution:
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        occurence=defaultdict(int)
+        for i,liste in enumerate(mat):
+            occurence[i]=sum(liste)
+        liste=sorted(occurence.keys(), key=lambda x: occurence[x])
+        return liste[0:k]
+    
+
+
+class Solution:
+    def findColumnWidth(self, grid: List[List[int]]) -> List[int]:
+        m=len(grid)
+        n=len(grid[0])
+        answer=[0 for _ in range(n)]
+        for i in range(n):
+            maximum=0
+            for j in range(m):
+                maximum=max(maximum,len(str(grid[j][i])))
+            answer[i]=maximum
+        return answer
+    
+
+
+
+class Solution:
+    def modifiedMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        answer=matrix 
+        m=len(answer)
+        n=len(answer[0])
+        for i in range(m):
+            for j in range(n):
+                if answer[i][j]==-1:
+                    answer[i][j]=max([answer[l][j] for l in range(m)])
+        return answer  
+
+
 
