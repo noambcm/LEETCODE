@@ -3865,3 +3865,20 @@ class Solution:
 
 
 
+class Solution:
+    def critere(self, dictionnaire:dict, word:str) -> bool:
+        temp_dict=dictionnaire.copy()
+        for char in word:
+            if char in temp_dict:
+                temp_dict[char]-=1
+        return all(value<=0 for value in temp_dict.values())
+
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        words=sorted(words, key= lambda x:len(x))
+        occurence=defaultdict(int)
+        letters=[char.lower() for char in licensePlate if char.isalpha()]
+        for letter in letters:
+            occurence[letter]+=1
+        for word in words:
+            if self.critere(occurence,word):
+                return word
