@@ -3882,3 +3882,61 @@ class Solution:
         for word in words:
             if self.critere(occurence,word):
                 return word
+
+
+#Version naive TLE
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if s2==s1:
+            return True
+        permutation=s1[::-1]
+        if permutation in s2:
+            return True
+        m=len(s1)
+        for i in range(len(s2)):
+            if s2[i] in s1:
+                if sorted(s1)==sorted(s2[i:i+m]):
+                    return True
+        return False
+    
+
+#1e version
+class Solution:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+        string=s
+        for i,index in enumerate(indices):
+            m=len(sources[i])
+            if string[index:index+m]==sources[i]:
+                s=s[:index]+targets[i]+s[index+m:]
+        return s
+    
+
+
+class Solution:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+        replacement=sorted(zip(indices,sources,targets), reverse= True)
+        for indice, source, target in replacement:
+            m=len(source)
+            if s[indice:indice+m]==source:
+                s=s[:indice]+target+s[indice+m:]
+        return s
+    
+
+
+class Solution:
+    def checkArithmetic(self, nums: List[int]) -> bool:
+        nums.sort()
+        diff=nums[1]-nums[0]
+        for i in range(2,len(nums)):
+            if nums[i]-nums[i-1]!=diff:
+                return False
+        return True
+
+    def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+        m=len(l)
+        answer=[False]*m
+        for i in range(m):
+            liste=nums[l[i]:r[i]+1]
+            if self.checkArithmetic(liste):
+                answer[i]=True
+        return answer
