@@ -3940,3 +3940,50 @@ class Solution:
             if self.checkArithmetic(liste):
                 answer[i]=True
         return answer
+    
+
+
+# on peut etre plus elegant en ecrivant : liste.append(dictionnaire.get(word, "?"))
+class Solution:
+    def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
+        dictionnaire={key:val for key,val in knowledge}
+        liste=[]
+        i=0
+        while i<len(s):
+            if s[i]=='(':
+                j=i+1
+                while s[j]!=')':
+                    j+=1
+                word=s[i+1:j]
+                if word in dictionnaire:
+                    liste.append(dictionnaire[word])
+                else:
+                    liste.append('?')
+                i=j+1
+            else:
+                liste.append(s[i])
+                i+=1
+        return ''.join(liste)
+    
+
+
+
+class Solution:
+    def isGood(self, s:str) -> bool:
+        frequency=defaultdict(int)
+        for char in s:
+            frequency[char]+=1
+            if frequency[char]>1:
+                return False
+        return True
+
+    def countGoodSubstrings(self, s: str) -> int:
+        n=len(s)
+        count=0
+        for i in range(n-2):
+            if self.isGood(s[i:i+3]):
+                count+=1
+        return count
+    
+
+
