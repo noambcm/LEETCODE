@@ -3987,3 +3987,45 @@ class Solution:
     
 
 
+
+class Solution:
+    def largestWordCount(self, messages: List[str], senders: List[str]) -> str:
+        count=defaultdict(int)
+        for i,name in enumerate(senders):
+            count[name]+=len(messages[i].split())
+        names=sorted(count.keys(), key=lambda x: (count[x],x), reverse=True)
+        return names[0]
+    
+
+
+
+class Solution:
+    def partitionString(self, s: str) -> int:
+        count=0
+        seen=set()
+        for char in s:
+            if char in seen:
+                count+=1
+                seen.clear()
+            seen.add(char)
+        return count+1
+    
+
+
+
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        n=len(s)
+        vowels='aeiou'
+        current_count=0
+        for i in range(k):
+            if s[i] in vowels:
+                current_count+=1
+        max_count=current_count
+        for i in range(k,n):
+            if s[i] in vowels:
+                current_count+=1
+            if s[i-k] in vowels:
+                current_count-=1
+            max_count=max(max_count,current_count)
+        return max_count
