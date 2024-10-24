@@ -4029,3 +4029,32 @@ class Solution:
                 current_count-=1
             max_count=max(max_count,current_count)
         return max_count
+    
+
+
+
+class Solution:
+    def dividePlayers(self, skill: List[int]) -> int:
+        skill.sort()
+        n=len(skill)
+        ref_skill=skill[0]+skill[-1]
+        chemistry=skill[0]*skill[-1]
+        for i in range(1,n//2):
+            ref=skill[i]+skill[n-1-i]
+            if ref!=ref_skill:
+                return -1
+            chemistry+=skill[i]*skill[n-1-i]
+        return chemistry
+
+
+
+class Solution:
+    def isSubstringPresent(self, s: str) -> bool:
+        candidats=[s[i:i+2] for i in range(len(s)-1)]
+        for candidat in candidats:
+            if candidat in s[::-1]:
+                return True
+        return False
+    
+
+    
