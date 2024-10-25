@@ -4057,4 +4057,14 @@ class Solution:
         return False
     
 
-    
+
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        n=len(s)
+        for i in range(n//2):
+            candidat=s[:i+1]
+            m=len(candidat)
+            puissance=n//m
+            if candidat*puissance==s:
+                return True
+        return False
