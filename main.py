@@ -4082,4 +4082,23 @@ class Solution:
 
 
 
+
+class Solution:
+    def divideString(self, s: str, k: int, fill: str) -> List[str]:
+        n=len(s)
+        i=0
+        answer=[]
+        while i<n:
+            word=s[i:i+k]
+            if len(word)==k:
+                answer.append(word)
+            else:
+                word=word+(k-len(word))*fill
+                answer.append(word)
+            i+=k
+        return answer
+
+
+
         
+
