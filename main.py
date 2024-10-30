@@ -4100,5 +4100,18 @@ class Solution:
 
 
 
-        
 
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        n=len(candies)
+        maximum=max(candies)
+        result=[False]*n
+        for i,candy in enumerate(candies):
+            if candy+extraCandies>=maximum:
+                result[i]=True
+            else:
+                result[i]=False
+        return result
+
+
+        
