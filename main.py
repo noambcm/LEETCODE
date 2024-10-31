@@ -4114,4 +4114,43 @@ class Solution:
         return result
 
 
+
+class Solution:
+    def match(self, s: string, pattern: str) -> bool:
+        n=len(pattern)
+        indexes=[]
+        words=[]
+        if [char for char in s if char.isupper()]!=[char for char in pattern if char.isupper()]:
+            return False
+        for i,char in enumerate(pattern):
+            if char.isupper():
+                indexes.append(i)
+        for i in range(len(indexes)-1):
+            words.append(pattern[indexes[i]:indexes[i+1]])
+        if pattern[-1].isupper():
+            words.append(pattern[-1])
+        for word in words:
+            if word not in s:
+                return False
+        return True
         
+
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        answer=[False]*len(queries)
+        for i in range(len(queries)):
+            if self.match(queries[i],pattern):
+                answer[i]=True
+        return answer
+
+
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        cities=[paths[i][1] for i in range(len(paths))]
+        departures=[paths[i][0] for i in range(len(paths))]
+        for city in cities:
+            if city not in departures:
+                return city
+
+
+
