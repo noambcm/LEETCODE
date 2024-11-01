@@ -4153,4 +4153,18 @@ class Solution:
                 return city
 
 
-
+class Solution:
+    def greatestLetter(self, s: str) -> str:
+        majuscule=defaultdict(int)
+        minuscule=defaultdict(int)
+        for char in s:
+            if char.isupper():
+                majuscule[char]+=1
+            else:
+                minuscule[char]+=1
+        candidats=[key for key in minuscule.keys() if key.upper() in majuscule.keys()]
+        candidats=sorted(candidats,reverse=True)
+        if candidats:
+            return candidats[0].upper()
+        else:
+            return ""
