@@ -4168,3 +4168,18 @@ class Solution:
             return candidats[0].upper()
         else:
             return ""
+
+
+
+class Solution:
+    def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        count=0
+        for arr in arr1:
+            drapeau=True
+            for element in arr2:
+                if abs(arr-element)<=d:
+                    drapeau=False
+                    break
+            if drapeau:
+                count+=1
+        return count
