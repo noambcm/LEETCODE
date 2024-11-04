@@ -4193,3 +4193,28 @@ class Solution:
             if height[i-1]>threshold:
                 indexes.append(i)
         return indexes 
+
+
+
+
+class Solution:
+    def encrypt(self, n:int) -> int:
+        x=str(n)
+        m=max(x)
+        x=m*len(x)
+        return int(x)
+
+    def sumOfEncryptedInt(self, nums: List[int]) -> int:
+        return sum([self.encrypt(num) for num in nums])
+
+
+
+#Tres content car medium a 66% de reussite et fait en 2min
+class Solution:
+    def distance(self, liste: List[int]) -> int:
+        x,y=liste
+        return x**2+y**2
+
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        points=sorted(points, key=lambda x:self.distance(x))
+        return points[0:k]
