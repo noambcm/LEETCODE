@@ -4218,3 +4218,28 @@ class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
         points=sorted(points, key=lambda x:self.distance(x))
         return points[0:k]
+
+
+
+
+class Solution:
+    def minimumBoxes(self, apple: List[int], capacity: List[int]) -> int:
+        apples=sum(apple)
+        capacity=sorted(capacity, reverse=True)
+        boxes=0
+        i=0
+        while apples>0:
+            apples-=capacity[i]
+            boxes+=1
+            i+=1
+        return boxes
+
+
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        altitudes=[0]
+        past=0
+        for denivele in gain:
+            altitudes.append(past+denivele)
+            past+=denivele
+        return max(altitudes)
