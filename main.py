@@ -4243,3 +4243,29 @@ class Solution:
             altitudes.append(past+denivele)
             past+=denivele
         return max(altitudes)
+
+
+
+
+class Solution:
+    def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        n=len(nums)
+        distant=[]
+        indexes=[j for j in range(n) if nums[j]==key]
+        for i in range(n):
+            if any(abs(i-j)<=k for j in indexes):
+                distant.append(i)
+        return distant
+
+
+#Degueulasse
+class Solution:
+    def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
+        good=0
+        n=len(arr)
+        for i in range(n-2):
+            for j in range(i+1,n-1):
+                for k in range(j+1,n):
+                    if abs(arr[i]-arr[j])<=a and abs(arr[j]-arr[k])<=b and abs(arr[i]-arr[k])<=c:
+                        good+=1
+        return good
