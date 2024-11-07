@@ -4269,3 +4269,15 @@ class Solution:
                     if abs(arr[i]-arr[j])<=a and abs(arr[j]-arr[k])<=b and abs(arr[i]-arr[k])<=c:
                         good+=1
         return good
+
+
+
+
+class Solution:
+    def getMinDistance(self, nums: List[int], target: int, start: int) -> int:
+        n=len(nums)
+        indexes=[i for i in range(n) if nums[i]==target]
+        minimum=float('inf')
+        for j in indexes:
+            minimum=min(minimum,abs(j-start))
+        return minimum
