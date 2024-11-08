@@ -4281,3 +4281,27 @@ class Solution:
         for j in indexes:
             minimum=min(minimum,abs(j-start))
         return minimum
+
+
+
+
+class Solution:
+    def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
+        index=-1
+        manhattan=float('inf')
+        for i,point in enumerate(points):
+            x1,y1=point
+            if x1==x or y1==y:
+                if abs(x-x1)+abs(y-y1)<manhattan:
+                    manhattan=abs(x-x1)+abs(y-y1)
+                    index=i
+        return index
+
+
+class Solution:
+    def operation(self, num:int) -> int:
+            x=str(num)
+            return sum([int(char) for char in x])
+
+    def minElement(self, nums: List[int]) -> int:
+        return min([self.operation(num) for num in nums])
