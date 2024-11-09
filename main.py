@@ -4305,3 +4305,17 @@ class Solution:
 
     def minElement(self, nums: List[int]) -> int:
         return min([self.operation(num) for num in nums])
+
+
+
+class Solution:
+    def splitNum(self, num: int) -> int:
+        num1=""
+        num2=""
+        x=sorted(str(num))
+        for i,char in enumerate(x):
+            if i%2==0:
+                num1+=char
+            else:
+                num2+=char
+        return int(num1) + int(num2)
