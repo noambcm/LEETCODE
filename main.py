@@ -4319,3 +4319,13 @@ class Solution:
             else:
                 num2+=char
         return int(num1) + int(num2)
+
+
+
+
+#TRIVIAL
+class Solution:
+    def convertTemperature(self, celsius: float) -> List[float]:
+        kelvin=celsius+273.15
+        fahr=celsius*1.80 + 32.00
+        return [kelvin,fahr]
