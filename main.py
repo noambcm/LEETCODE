@@ -4329,3 +4329,14 @@ class Solution:
         kelvin=celsius+273.15
         fahr=celsius*1.80 + 32.00
         return [kelvin,fahr]
+
+
+class Solution:
+    def getFinalState(self, nums: List[int], k: int, multiplier: int) -> List[int]:
+        j=0
+        while j<k:
+            x=min(nums)
+            min_index=nums.index(x)
+            nums[min_index]=x*multiplier
+            j+=1
+        return nums
