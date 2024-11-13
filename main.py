@@ -4340,3 +4340,22 @@ class Solution:
             nums[min_index]=x*multiplier
             j+=1
         return nums
+
+
+
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+        columns=0
+        n=len(strs[0])
+        for i in range(n):
+            for j in range(1,len(strs)):
+                if strs[j-1][i]>strs[j][i]:
+                    columns+=1
+                    break
+        return columns
+
+
+class Solution:
+    def truncateSentence(self, s: str, k: int) -> str:
+        words=list(s.split())[0:k]
+        return ' '.join(words)
