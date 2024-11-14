@@ -4359,3 +4359,30 @@ class Solution:
     def truncateSentence(self, s: str, k: int) -> str:
         words=list(s.split())[0:k]
         return ' '.join(words)
+
+
+
+class Solution:
+    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
+        if start>destination:
+            start,destination=destination,start
+        distance1=sum(distance[start:destination])
+        distance2=sum(distance[destination:])+sum(distance[:start])
+        return min(distance1,distance2)
+
+
+
+class Solution:
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        occurence=defaultdict(int)
+        for num in arr:
+            occurence[num]+=1
+        sorted_occurence=sorted(occurence.items(),key=lambda x:x[1])
+        reste=len(set(arr))
+        for key,val in sorted_occurence:
+            if k>=val:
+                k-=val
+                reste-=1
+            else:
+                break
+        return reste
