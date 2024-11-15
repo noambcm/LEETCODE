@@ -4386,3 +4386,37 @@ class Solution:
             else:
                 break
         return reste
+
+
+
+class Solution:
+    def oddCells(self, m: int, n: int, indices: List[List[int]]) -> int:
+        matrix=[[0]*n for _ in range(m)]
+        for row,column in indices:
+            for j in range(n):
+                matrix[row][j]+=1
+            for i in range(m):
+                matrix[i][column]+=1
+        odd=0
+        for row in matrix:
+            for num in row:
+                if num%2!=0:
+                    odd+=1
+        return odd
+
+
+class Solution:
+    def minimumDeletions(self, nums: List[int]) -> int:
+        n=len(nums)
+        mediane=n//2
+        max_index=nums.index(max(nums))
+        min_index=nums.index(min(nums))
+        if max_index<=mediane and min_index<=mediane:
+            return max(max_index,min_index)+1
+        elif max_index>=mediane and min_index>=mediane:
+            return n-min(max_index,min_index)
+        else:
+            front=max(min_index,max_index)+1
+            back=n-min(min_index,max_index)
+            mix=min(min_index+1+n-max_index, n-min_index+max_index+1)
+            return min(front,back,mix)
