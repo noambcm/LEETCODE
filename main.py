@@ -4420,3 +4420,29 @@ class Solution:
             back=n-min(min_index,max_index)
             mix=min(min_index+1+n-max_index, n-min_index+max_index+1)
             return min(front,back,mix)
+
+
+
+class Solution:
+    def commonFactors(self, a: int, b: int) -> int:
+        common=0
+        for i in range(1,min(a,b)+1):
+            if a%i==0 and b%i==0:
+                common+=1
+        return common
+
+
+
+class Solution:
+    def addSpaces(self, s: str, spaces: List[int]) -> str:
+        s=list(s)
+        final=[]
+        spaces_index=0
+        for i,char in enumerate(s):
+            if spaces_index<len(spaces) and i==spaces[spaces_index]:
+                final.append(' ')
+                final.append(char)
+                spaces_index+=1
+            else:
+                final.append(char)
+        return ''.join(final)
