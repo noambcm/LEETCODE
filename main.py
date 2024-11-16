@@ -4446,3 +4446,18 @@ class Solution:
             else:
                 final.append(char)
         return ''.join(final)
+
+
+
+Version 1 du precedent: TLE 59/66
+class Solution: 
+	def addSpaces(self, s: str, spaces: List[int]) -> str: 
+		s=list(s) 
+		final=[] 
+		for i,char in enumerate(s): 
+			if i in spaces: 	
+				final.append(' ') 
+				final.append(char) 
+			else: 
+				final.append(char) 
+		return ''.join(final)
