@@ -4461,3 +4461,32 @@ class Solution:
 			else: 
 				final.append(char) 
 		return ''.join(final)
+
+
+#Pas terrible du tout pour la complexité, bat seulement 13% des soumissions
+class Solution:
+    def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
+        occurence=defaultdict(int)
+        for element in arr:
+            occurence[element]+=1
+        for element in target:
+            occurence[element]-=1
+        if list(set(occurence.values()))!=[0]:
+            return False
+        return True
+
+
+
+class Solution:
+    def maximumBags(self, capacity: List[int], rocks: List[int], additionalRocks: int) -> int:
+        n=len(capacity)
+        remaining_place=sorted([capacity[i]-rocks[i] for i in range(n)])
+        full_bags=0
+        i=0
+        while additionalRocks>0 and i<n:
+            if remaining_place[i]>0:
+                fill_amount=min(additionalRocks,remaining_place[i])
+                remaining_place[i]-=fill_amount
+                additionalRocks-=fill_amount
+            i+=1
+        return remaining_place.count(0)
