@@ -4490,3 +4490,52 @@ class Solution:
                 additionalRocks-=fill_amount
             i+=1
         return remaining_place.count(0)
+
+
+
+class Solution:
+    def countAsterisks(self, s: str) -> int:
+        asterisks=0
+        bars=0
+        for char in s:
+            if char=='|':
+                bars+=1
+            if char=='*' and bars%2==0:
+                asterisks+=1
+        return asterisks
+
+
+#Runtime 5% seulement : horrible
+class Solution:
+    def position(self, s:str) -> int:
+        return ord(s)-ord('a')
+
+    def getLetter(self, n:int) -> str:
+        return chr(n+ord('a'))
+
+    def stringHash(self, s: str, k: int) -> str:
+        n=len(s)
+        result=[]
+        i=0
+        while i<len(s):
+            substring=s[i:i+k]
+            hashedChar=sum([self.position(substring[i]) for i in range(len(substring))])%26
+            identification=self.getLetter(hashedChar)
+            result.append(identification)
+            i+=k
+        return ''.join(result)
+
+
+
+class Solution:
+    def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        even=sum(num for num in nums if num % 2 == 0)
+        answer=[]
+        for val,index in queries:
+            if nums[index]%2==0:
+                even-=nums[index] 
+            nums[index]+=val
+            if nums[index]%2==0:
+                even+=nums[index]  
+            answer.append(even)
+        return answer
