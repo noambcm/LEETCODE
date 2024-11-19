@@ -4539,3 +4539,35 @@ class Solution:
                 even+=nums[index]  
             answer.append(even)
         return answer
+
+
+
+#Runtime 5% : pas terrible du tout. Autre approche apres
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        matching=0
+        players=sorted(players)
+        trainers=sorted(trainers)
+        for player in players:
+            for trainer in trainers:
+                if trainer>=player:
+                    matching+=1
+                    trainers.remove(trainer)
+                    break
+        return matching
+
+
+
+#40% runtime : two pointers bcp mieux
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        matching=0
+        players=sorted(players)
+        trainers=sorted(trainers)
+        i,j=0,0
+        while i<len(players) and j<len(trainers):
+            if players[i]<=trainers[j]:
+                matching+=1
+                i+=1
+            j+=1
+        return matching
