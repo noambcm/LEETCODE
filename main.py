@@ -4571,3 +4571,64 @@ class Solution:
                 i+=1
             j+=1
         return matching
+
+
+
+#Enonce mal compris : fait qu’avec les puissances de 2
+class Solution:
+    def powerOfTwo(self,n:int)->bool:
+        if n%2!=0:
+            return False
+        while n%2==0 and n>1:
+            n//=2
+        return n==1
+
+    def longestSquareStreak(self, nums: List[int]) -> int:
+        nums=sorted(nums)
+        powers=sorted([num for num in nums if self.powerOfTwo(num)])
+        if len(powers)<2:
+            return -1
+        streak=1
+        for power in powers:
+            if power*power in powers:
+                streak+=1
+        if streak<2:
+            return -1
+        return streak
+
+
+#J’ABANDONNE
+class Solution:
+    def longestSquareStreak(self, nums: List[int]) -> int:
+        longest=0
+        for num in set(nums):
+            streak=1
+            current=num
+            while current*current in set(nums):
+                streak+=1
+                current=current*current
+            longest=max(longest,streak)
+            current = num
+            while current in nums:
+                nums.remove(current)
+                current = current * current
+        if longest<2:
+            return -1
+        return longest
+
+
+#Celui là marche
+class Solution:
+    def longestSquareStreak(self, nums: List[int]) -> int:
+        longest=0
+        nums=set(sorted(nums))
+        for num in nums:
+            streak=1
+            current=num
+            while current*current in nums:
+                streak+=1
+                current=current*current
+            longest=max(longest,streak)
+        if longest<2:
+            return -1
+        return longest
