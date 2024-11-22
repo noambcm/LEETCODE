@@ -4632,3 +4632,49 @@ class Solution:
         if longest<2:
             return -1
         return longest
+
+
+
+class Solution:
+    def hardestWorker(self, n: int, logs: List[List[int]]) -> int:
+        n=len(logs)
+        times=[logs[0][1]]
+        for i in range(1,n):
+            times.append(logs[i][1]-logs[i-1][1])
+        maximum_time=max(times)
+        candidates=[]
+        for i,time in enumerate(times):
+            if time==maximum_time:
+                candidates.append(logs[i][0])
+        return min(candidates)
+
+
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        m=len(mat)
+        n=len(mat[0])
+        number=0
+        for row in mat:
+            if sum(row)==1:
+                indice=row.index(1)
+                if sum([mat[j][indice] for j in range(m)])==1:
+                    number+=1
+        return number
+
+
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longest=0
+        i=0
+        while i<len(s):
+            length=0
+            seen=set()
+            j=i
+            while j<len(s) and s[j] not in seen:
+                seen.add(s[j])
+                j+=1
+                length+=1
+            longest=max(longest,length)
+            i+=1
+        return longest 
