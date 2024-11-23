@@ -4678,3 +4678,51 @@ class Solution:
             longest=max(longest,length)
             i+=1
         return longest 
+
+
+
+#ONE LINER : BOOOM. 36,3% d’acceptation
+class Solution:
+    def countSegments(self, s: str) -> int:
+        return len(s.split())
+
+
+class Solution:
+    def numberOfLines(self, widths: List[int], s: str) -> List[int]:
+        n=len(s)
+        total_pixels=0
+        lines=1
+        for i in range(n):
+            index=ord(s[i])-ord('a')
+            if total_pixels+widths[index]>100:
+                lines+=1
+                total_pixels=widths[index]
+            else:
+                total_pixels+=widths[index]
+        return [lines, total_pixels]
+
+
+class Solution:
+    def compressedString(self, word: str) -> str:
+        comp=[]
+        word=list(word)
+        n=len(word)
+        i=0
+        while i<n:
+            j=i
+            current_count=1
+            while j<len(word)-1 and word[j+1]==word[j]:
+                current_count+=1
+                j+=1
+            if current_count<=9:
+                comp.append(str(current_count))
+                comp.append(word[i])
+            else:
+                q=current_count//9
+                r=current_count%9
+                comp.extend(['9'+word[i]]*q)
+                if r>0:
+                    comp.append(str(r))
+                    comp.append(word[i])
+            i=j+1
+        return ''.join(comp)
