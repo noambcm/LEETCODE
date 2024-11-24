@@ -4726,3 +4726,29 @@ class Solution:
                     comp.append(word[i])
             i=j+1
         return ''.join(comp)
+
+
+
+class Solution:
+    def closetTarget(self, words: List[str], target: str, startIndex: int) -> int:
+        if target not in words:
+            return -1
+        shortest=float('inf')
+        n=len(words)
+        liste_index=[i for i in range(len(words)) if words[i]==target]
+        for index in liste_index:
+            left_to_right=(index-startIndex)%n
+            right_to_left=(startIndex-index)%n
+            distance=min(left_to_right,right_to_left)
+            shortest=min(shortest, distance)
+        return shortest
+
+
+
+class Solution:
+    def squareIsWhite(self, coordinates: str) -> bool:
+        letter=ord(coordinates[0])-ord('a')+1
+        figure=int(coordinates[1])
+        if (letter+figure)%2!=0:
+            return True
+        return False
