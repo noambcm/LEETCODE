@@ -4752,3 +4752,48 @@ class Solution:
         if (letter+figure)%2!=0:
             return True
         return False
+
+
+
+lass Solution:
+    def sumDigit(self, n:int) ->int:
+        somme=0
+        while n>0:
+            somme+=n%10
+            n//=10
+        return somme
+
+    def maximumSum(self, nums: List[int]) -> int:
+        n=len(nums)
+        somme=defaultdict(list)
+        for num in nums:
+            somme[self.sumDigit(num)].append(num)
+        if all(len(val)<2 for val in somme.values()):
+            return -1
+        maximum=float('-inf')
+        candidates=[val for val in somme.values() if len(val)>=2]
+        for val in candidates:
+            val=sorted(val, reverse=True)
+            maximum=max(maximum, sum(val[:2]))
+        return maximum
+
+
+
+class Solution:
+    def sequence(self, s:str, t:str):
+        first_position=ord(s)-ord('a')
+        second_position=ord(t)-ord('a')
+        return second_position-first_position==1
+
+    def longestContinuousSubstring(self, s: str) -> int:
+        i=0
+        longest=0
+        while i<len(s):
+            j=i
+            length=1
+            while j<len(s)-1 and self.sequence(s[j],s[j+1]):
+                j+=1
+                length+=1
+            longest=max(longest,length)
+            i=j+1
+        return longest
