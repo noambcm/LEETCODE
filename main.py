@@ -4797,3 +4797,40 @@ class Solution:
             longest=max(longest,length)
             i=j+1
         return longest
+
+
+
+class Solution:        
+    def printVertically(self, s: str) -> List[str]:
+        s=s.split()
+        m=max(len(word) for word in s)
+        answer=['']*m
+        for i in range(m):
+            for word in s:
+                if i>=len(word):
+                    answer[i]+=' '
+                else:
+                    answer[i]+=word[i]
+        return [word.rstrip() for word in answer]
+
+
+#Convertir les lists en sets aident contre le TLE : acces en 0(1)
+class Solution:
+    def topStudents(self, positive_feedback: List[str], negative_feedback: List[str], report: List[str], student_id: List[int], k: int) -> List[int]:
+        positive_feedback=set(positive_feedback)
+        negative_feedback=set(negative_feedback)
+        score=defaultdict(int)
+        for i,student in enumerate(student_id):
+            rapport=report[i].split()
+            count=0
+            for word in rapport:
+                if word in positive_feedback:
+                    count+=3
+                elif word in negative_feedback:
+                    count-=1
+            score[student]=count
+        students=sorted(list((score.keys())), key=lambda x:(-score[x],x))
+        return students[:k]
+
+
+        
