@@ -4833,4 +4833,15 @@ class Solution:
         return students[:k]
 
 
-        
+class Solution:        
+    def printVertically(self, s: str) -> List[str]:
+        s=s.split()
+        m=max(len(word) for word in s)
+        answer=['']*m
+        for i in range(m):
+            for word in s:
+                if i>=len(word):
+                    answer[i]+=' '
+                else:
+                    answer[i]+=word[i]
+        return [word.rstrip() for word in answer]
