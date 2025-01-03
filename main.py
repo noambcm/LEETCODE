@@ -4865,3 +4865,18 @@ class Solution:
             score[student]=count
         students=sorted(list((score.keys())), key=lambda x:(-score[x],x))
         return students[:k]
+
+
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+        units=0
+        boxTypes=sorted([liste for liste in boxTypes], key= lambda x:-x[1])
+        n=len(boxTypes)
+        i=0
+        while truckSize>0 and i<n:
+            box,unit=boxTypes[i]
+            fill_boxes=min(box,truckSize)
+            truckSize-=fill_boxes
+            units+=fill_boxes*unit
+            i+=1
+        return units
