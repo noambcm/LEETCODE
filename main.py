@@ -4880,3 +4880,14 @@ class Solution:
             units+=fill_boxes*unit
             i+=1
         return units
+
+
+
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        n=len(arr)
+        m=sorted(arr)[(n-1)//2]
+        arr=sorted(arr, key=lambda x:(-abs(x-m),-x))
+        return arr[:k]
+
+
