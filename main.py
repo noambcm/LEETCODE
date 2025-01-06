@@ -4890,4 +4890,29 @@ class Solution:
         arr=sorted(arr, key=lambda x:(-abs(x-m),-x))
         return arr[:k]
 
+#deja faits mais mieux réalisés
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        word=''
+        frequency=defaultdict(int)
+        for char in s:
+            frequency[char]+=1
+        couples=sorted(frequency.items(), key=lambda x:-x[1])
+        for char,iteration in couples:
+            word+=char*iteration
+        return word
+
+
+
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if word.upper()==word or word.lower()==word:
+            return True
+        else:
+            if not word[0].isupper():
+                return False
+            for i in range(1,len(word)):
+                if word[i].isupper():
+                    return False
+        return True
 
