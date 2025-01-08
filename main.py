@@ -4926,3 +4926,17 @@ class Solution:
                 old+=1
         return old
 
+
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        enfants=sorted(g)
+        cookies=sorted(s)
+        content=0
+        i,j=0,0
+        while i<len(enfants) and j<len(cookies):
+            if enfants[i]<=cookies[j]:
+                content+=1
+                i+=1
+            j+=1
+        return content
+
