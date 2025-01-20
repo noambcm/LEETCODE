@@ -4949,3 +4949,15 @@ class Solution:
                 keyboard+=1
         return keyboard
 
+
+class Solution:
+    def minTimeToType(self, word: str) -> int:
+        n=len(word)
+        number=min((ord(word[0])-ord('a'))%26,(ord('a')-ord(word[0]))%26)
+        for i in range(1,n):
+            indice1=ord(word[i-1])-ord('a')
+            indice2=ord(word[i])-ord('a')
+            number+=min((indice2-indice1)%26,(indice1-indice2)%26)
+        return number+n
+
+
