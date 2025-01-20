@@ -4940,3 +4940,12 @@ class Solution:
             j+=1
         return content
 
+class Solution:
+    def canBeTypedWords(self, text: str, brokenLetters: str) -> int:
+        keyboard=0
+        text=text.split()
+        for word in text:
+            if all(char not in brokenLetters for char in word):
+                keyboard+=1
+        return keyboard
+
