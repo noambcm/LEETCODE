@@ -4961,3 +4961,22 @@ class Solution:
         return number+n
 
 
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        occurence=defaultdict(int)
+        for num in nums:
+            occurence[num]+=1
+        keys=[key for key in occurence.keys() if occurence[key]==2]
+        return keys
+
+
+#Meilleur runtime
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        keys=[]
+        occurence=defaultdict(int)
+        for num in nums:
+            occurence[num]+=1
+            if occurence[num]==2:
+                keys.append(num)
+        return keys
