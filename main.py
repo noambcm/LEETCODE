@@ -4980,3 +4980,14 @@ class Solution:
             if occurence[num]==2:
                 keys.append(num)
         return keys
+
+
+
+#100% en terme de complexite temps 
+class Solution:
+    def countKeyChanges(self, s: str) -> int:
+        count=0
+        for i in range(1,len(s)):
+            if s[i] not in [s[i-1].lower(), s[i-1].upper()]:
+                count+=1
+        return count
