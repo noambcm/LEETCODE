@@ -4991,3 +4991,10 @@ class Solution:
             if s[i] not in [s[i-1].lower(), s[i-1].upper()]:
                 count+=1
         return count
+
+
+class Solution:
+    def isBalanced(self, num: str) -> bool:
+        even=sum([int(num[i]) for i in range(len(num)) if i%2==0])
+        odd=sum([int(num[i]) for i in range(len(num)) if i%2!=0])
+        return even==odd
