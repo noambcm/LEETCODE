@@ -4998,3 +4998,21 @@ class Solution:
         even=sum([int(num[i]) for i in range(len(num)) if i%2==0])
         odd=sum([int(num[i]) for i in range(len(num)) if i%2!=0])
         return even==odd
+
+
+
+class Solution:
+    def interpret(self, command: str) -> str:
+        answer=[]
+        i=0
+        while i<len(command):
+            if command[i]=='G':
+                answer.append('G')
+                i+=1
+            elif command[i]=='(' and command[i+1]==')':
+                answer.append('o')
+                i+=2
+            else:
+                answer.append('al')
+                i+=4
+        return ''.join(answer)
