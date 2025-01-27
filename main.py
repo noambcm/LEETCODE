@@ -5016,3 +5016,22 @@ class Solution:
                 answer.append('al')
                 i+=4
         return ''.join(answer)
+
+
+
+  def reformatDate(self, date: str) -> str:
+        answer=''
+        date=date.split()
+        months = {"Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"}
+        day,month,year=date[0],date[1],date[2]
+        answer+=year + '-'
+        month=months[month]
+        answer+=month + '-'
+        if len(day)==3:
+            day=day[:1]
+            answer+='0' + day 
+        else:
+            day=day[:2]
+            answer+=day
+        return answer
+
