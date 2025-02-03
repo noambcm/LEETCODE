@@ -5046,3 +5046,17 @@ class Solution:
                 count+=ecart+1
                 nums[i+1]+=ecart+1
         return count
+
+
+
+class Solution:
+    def minimumAverage(self, nums: List[int]) -> float:
+        averages=[]
+        for _ in range(len(nums)//2):
+            minimum=min(nums)
+            nums.remove(minimum)
+            maximum=max(nums)
+            nums.remove(maximum)
+            averages.append((minimum+maximum)/2)
+        return min(averages)
+
