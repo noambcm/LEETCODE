@@ -5060,3 +5060,16 @@ class Solution:
             averages.append((minimum+maximum)/2)
         return min(averages)
 
+
+class Solution:
+    def countSymmetricIntegers(self, low: int, high: int) -> int:
+        count=0
+        for integer in range(low,high+1):
+            x=str(integer)
+            if len(x)%2==0:
+                n=len(x)//2
+                first_half=[int(x[i]) for i in range(0,n)]
+                second_half=[int(x[i]) for i in range(n,len(x))]
+                if sum(first_half)==sum(second_half):
+                    count+=1
+        return count
