@@ -5073,3 +5073,14 @@ class Solution:
                 if sum(first_half)==sum(second_half):
                     count+=1
         return count
+
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        occurence = defaultdict(int)
+        for num in nums:
+            occurence[num]+=1
+        for key, val in occurence.items():
+            if val==1:
+                return key
