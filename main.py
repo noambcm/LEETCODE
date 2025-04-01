@@ -5095,3 +5095,16 @@ class Solution:
         for key in keys:
             word += key*frequency[key]
         return word
+
+
+
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        word =''
+        frequency = defaultdict(int)
+        for char in s:
+            frequency[char] += 1
+        keys = sorted(frequency.keys(), key= lambda x: -frequency[x])
+        for key in keys:
+            word += key*frequency[key]
+        return word
