@@ -5123,3 +5123,30 @@ class Solution:
 
 
 
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        memo = {1:1, 2:2}
+        def f(n):
+            if n in memo:
+                return memo[n]
+            else:
+                memo[n] = f(n-1) + f(n-2)
+            return memo[n]
+        return f(n)
+
+
+def minCostClimbingStairs(self, cost: List[int]) -> int:
+        n = len(cost)
+        memo = {0:0, 1:0} # best cases
+
+        def min_cost(i):
+            if i in memo:
+                return memo[i]
+            else:
+                memo[i] = min(cost[i-2] + min_cost(i-2), cost[i-1] + min_cost(i-1))
+                return memo[i]
+        
+        return min_cost(n)
+
+
+
