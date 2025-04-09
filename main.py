@@ -5175,6 +5175,16 @@ class Solution:
         return dp[n-1]
 
 
-
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        if n == 1:    # best cases
+            return 1
+        if m == 1:
+            return 1
+        dp = [[1]*n for _ in range(m)] # 1 car qu'une seule facon pour atteindre dp[0][j] et dp[i][0] donc on initialise tout à 1
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i][j-1] + dp[i-1][j] 
+        return dp[m-1][n-1]
 
 
