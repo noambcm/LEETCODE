@@ -5188,3 +5188,11 @@ class Solution:
         return dp[m-1][n-1]
 
 
+# triangle de Pascal, bat 100% des solutions en terme de temps !
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        output = [[1]*(i+1) for i in range(numRows)]
+        for i in range(1,numRows):
+            for j in range(1,i):
+                output[i][j] = output[i-1][j] + output[i-1][j-1]
+        return output
