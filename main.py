@@ -5196,3 +5196,23 @@ class Solution:
             for j in range(1,i):
                 output[i][j] = output[i-1][j] + output[i-1][j-1]
         return output
+
+
+# respecte pas la contrainte de O(rowIndex) extra space
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        liste = [[1]*(i+1) for i in range(rowIndex+1)]
+        for i in range(1,rowIndex+1):
+            for j in range(1,i):
+                liste[i][j] = liste[i-1][j-1] + liste[i-1][j]
+        return liste[-1]
+
+
+
+# Respectée cette fois ci
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        row = [1] * (rowIndex+1)
+        for i in range(1,rowIndex+1):
+            row[i] = row[i-1] * (rowIndex - i + 1) // i
+        return row
