@@ -5216,3 +5216,31 @@ class Solution:
         for i in range(1,rowIndex+1):
             row[i] = row[i-1] * (rowIndex - i + 1) // i
         return row
+
+
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        if n==0:
+            return 0
+        if n==1:
+            return 1
+        if n==2:
+            return 1
+        df = [0] * (n+1)
+        df[1], df[2] = 1, 1
+        for i in range(3, n+1):
+            df[i] = df[i-3] + df[i-2] + df[i-1]
+        return df[n]
+
+
+
+# Que 39% d’acceptation 
+class Solution:
+    def maxRepeating(self, sequence: str, word: str) -> int:
+        if word not in sequence:
+            return 0
+        k=1
+        while word*k in sequence:
+            k+=1
+        return k-1
+
