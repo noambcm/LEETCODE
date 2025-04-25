@@ -5217,7 +5217,6 @@ class Solution:
             row[i] = row[i-1] * (rowIndex - i + 1) // i
         return row
 
-
 class Solution:
     def tribonacci(self, n: int) -> int:
         if n==0:
@@ -5243,4 +5242,5 @@ class Solution:
         while word*k in sequence:
             k+=1
         return k-1
+
 
