@@ -5244,3 +5244,47 @@ class Solution:
         return k-1
 
 
+
+class Solution:
+    def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
+        output = [words[0]]
+        comparaison = groups[0]
+        i = 1
+        while i < len(words):
+            if groups[i]!= comparaison:
+                comparaison = groups[i]
+                output.append(words[i])
+            i+=1
+        return output
+
+
+
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i, j = 0, 0
+        while i<len(s) and j<len(t):
+            if s[i] == t[j]:
+                i+=1
+            j += 1
+        return i == len(s)
+
+
+
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        # dp[i][j] coût minimum d'arrivée en  en (i,j)
+
+        dp = [[0]*n for _ in range(m)]
+        dp[0][0] = grid[0][0]
+
+        for j in range(1,n):
+            dp[0][j] = grid[0][j] + dp[0][j-1]
+        for i in range(1, m):
+            dp[i][0] = grid[i][0] + dp[i-1][0]
+        for i in range(1,m):
+            for j in range(1,n):
+                dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
+                
+        return dp[m-1][n-1]
