@@ -5288,3 +5288,45 @@ class Solution:
                 dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
                 
         return dp[m-1][n-1]
+
+
+
+# 1e version naive : 0(n^2)
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        maximum_sum = float('-inf')
+        n=len(nums)
+        for i in range(n-1):
+            current_sum = nums[i]
+            for j in range(i+1,n):
+                current_sum += nums[j]
+                maximum_sum = max(current_sum, maximum_sum)
+        return maximum_sum
+
+# 2e version : DP
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        # dp[i] : max sum of subarray up to i
+        dp = [0]*n
+        dp[0] = nums[0]
+        maximum_sum = dp[0]
+        for i in range(1,n):
+            dp[i] = max(nums[i], dp[i-1] + nums[i])
+            maximum_sum = max(maximum_sum, dp[i])
+        return maximum_sum
+
+# DP : je l’ai trouvé solo 
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        maximum_profit = float('-inf')
+        minimum_price = prices[0]
+        dp = [0]*n # profit en i = max(nums[i] - prix_min en i, profit max jusqu'a i-1)
+        for i in range(1,n):
+            dp[i] = max(prices[i] - minimum_price, dp[i-1])
+            if prices[i] < minimum_price:
+                minimum_price = prices[i]
+        return dp[-1]
